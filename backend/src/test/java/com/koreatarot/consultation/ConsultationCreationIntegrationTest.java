@@ -10,9 +10,12 @@ import com.koreatarot.consultation.service.ConsultationService;
 import com.koreatarot.consultation.service.DraftDeckService;
 import com.koreatarot.consultation.service.IdempotencyService;
 import com.koreatarot.tarot.enums.PositionCode;
+import com.koreatarot.user.entity.User;
+import com.koreatarot.user.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.util.ReflectionTestUtils;
 
+import java.time.LocalDateTime;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
@@ -29,6 +32,7 @@ class ConsultationCreationIntegrationTest {
     private final ConsultationRepository consultationRepository = mock(ConsultationRepository.class);
     private final ConsultationCardRepository consultationCardRepository = mock(ConsultationCardRepository.class);
     private final DraftDeckService draftDeckService = mock(DraftDeckService.class);
+    private final UserRepository userRepository = mock(UserRepository.class);
     private final CardSelectionValidator cardSelectionValidator = new CardSelectionValidator();
     private final IdempotencyService idempotencyService = new IdempotencyService(consultationRepository);
     private final ConsultationService consultationService = new ConsultationService(
@@ -36,7 +40,8 @@ class ConsultationCreationIntegrationTest {
             consultationCardRepository,
             draftDeckService,
             cardSelectionValidator,
-            idempotencyService
+            idempotencyService,
+            userRepository
     );
 
     @Test
@@ -55,6 +60,7 @@ class ConsultationCreationIntegrationTest {
 
         when(consultationRepository.findByUserIdAndIdempotencyKey(userId, idempotencyKey))
                 .thenReturn(Optional.empty());
+        when(userRepository.findById(userId)).thenReturn(Optional.of(user(userId)));
         when(draftDeckService.consume("drf_abc123", userId)).thenReturn(draftDeck);
         when(consultationRepository.save(any(Consultation.class))).thenAnswer(invocation -> {
             Consultation consultation = invocation.getArgument(0);
@@ -88,6 +94,7 @@ class ConsultationCreationIntegrationTest {
 
         when(consultationRepository.findByUserIdAndIdempotencyKey(userId, idempotencyKey))
                 .thenReturn(Optional.of(existing));
+        when(userRepository.findById(userId)).thenReturn(Optional.of(user(userId)));
 
         Consultation result = consultationService.create(userId, idempotencyKey, request());
 
@@ -105,5 +112,18 @@ class ConsultationCreationIntegrationTest {
                         new ConsultationSelectionDto.CardSelectionRequest(17, PositionCode.ADVICE)
                 )
         );
+    }
+
+    private User user(Long id) {
+        LocalDateTime now = LocalDateTime.of(2026, 5, 19, 10, 0);
+        User user = User.builder()
+                .email("user@example.com")
+                .passwordHash("password-hash")
+                .nickname("tarouser")
+                .termsAgreedAt(now)
+                .privacyAgreedAt(now)
+                .build();
+        ReflectionTestUtils.setField(user, "id", id);
+        return user;
     }
 }

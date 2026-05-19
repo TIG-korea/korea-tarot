@@ -7,6 +7,7 @@ import com.koreatarot.user.dto.UserDto;
 import com.koreatarot.user.entity.User;
 import com.koreatarot.user.enums.UserStatus;
 import com.koreatarot.user.repository.UserRepository;
+import com.koreatarot.user.service.UserWithdrawalService;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.util.ReflectionTestUtils;
 
@@ -26,7 +27,7 @@ class UserProfileIntegrationTest {
         User user = user();
         when(userRepository.findById(1L)).thenReturn(Optional.of(user));
 
-        UserController userController = new UserController(userRepository);
+        UserController userController = new UserController(userRepository, mock(UserWithdrawalService.class));
         ApiResponse<UserDto.ProfileResponse> response =
                 userController.me(new AuthenticatedUser(1L, "user@example.com"));
 
@@ -39,7 +40,7 @@ class UserProfileIntegrationTest {
 
     @Test
     void meRejectsUnauthenticatedRequest() {
-        UserController userController = new UserController(mock(UserRepository.class));
+        UserController userController = new UserController(mock(UserRepository.class), mock(UserWithdrawalService.class));
 
         assertThatThrownBy(() -> userController.me(null))
                 .isInstanceOf(BusinessException.class);

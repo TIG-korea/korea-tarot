@@ -10,6 +10,9 @@ import com.koreatarot.global.error.BusinessException;
 import com.koreatarot.global.error.ErrorCode;
 import com.koreatarot.tarot.enums.CardOrientation;
 import com.koreatarot.tarot.enums.PositionCode;
+import com.koreatarot.user.entity.User;
+import com.koreatarot.user.enums.UserStatus;
+import com.koreatarot.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,19 +27,22 @@ public class ConsultationService {
     private final DraftDeckService draftDeckService;
     private final CardSelectionValidator cardSelectionValidator;
     private final IdempotencyService idempotencyService;
+    private final UserRepository userRepository;
 
     public ConsultationService(
             ConsultationRepository consultationRepository,
             ConsultationCardRepository consultationCardRepository,
             DraftDeckService draftDeckService,
             CardSelectionValidator cardSelectionValidator,
-            IdempotencyService idempotencyService
+            IdempotencyService idempotencyService,
+            UserRepository userRepository
     ) {
         this.consultationRepository = consultationRepository;
         this.consultationCardRepository = consultationCardRepository;
         this.draftDeckService = draftDeckService;
         this.cardSelectionValidator = cardSelectionValidator;
         this.idempotencyService = idempotencyService;
+        this.userRepository = userRepository;
     }
 
     @Transactional
@@ -45,9 +51,18 @@ public class ConsultationService {
             String idempotencyKey,
             ConsultationSelectionDto.CreateRequest request
     ) {
+        validateActiveUser(userId);
         String key = idempotencyService.validate(idempotencyKey);
         return idempotencyService.findExisting(userId, key)
                 .orElseGet(() -> createNew(userId, key, request));
+    }
+
+    private void validateActiveUser(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new BusinessException(ErrorCode.UNAUTHORIZED));
+        if (user.getStatus() != UserStatus.ACTIVE) {
+            throw new BusinessException(ErrorCode.CONFLICT, "탈퇴 요청된 사용자는 새 상담을 만들 수 없습니다.");
+        }
     }
 
     private Consultation createNew(

@@ -77,4 +77,11 @@ public class User {
         this.createdAt = now;
         this.updatedAt = now;
     }
+
+    public void requestWithdrawal() {
+        if (this.status == UserStatus.ACTIVE) {
+            this.status = UserStatus.WITHDRAWAL_REQUESTED;
+            this.updatedAt = LocalDateTime.now();
+        }
+    }
 }
