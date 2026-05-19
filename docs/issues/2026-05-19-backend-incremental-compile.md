@@ -35,3 +35,9 @@ cannot find symbol: class AuthProperties
 gradlew.bat clean test
 gradlew.bat test
 ```
+
+## 추가 재현 기록
+
+- 2026-05-19 `T051 AI WebClient 구현` 후 `gradlew.bat test`에서 동일 계열의 `compileJava` 오류가 재현됐다.
+- 오류 예시는 `package com.koreatarot.global.error does not exist`로, 실제 소스 파일은 존재했다.
+- `gradlew.bat clean test` 성공 후 `gradlew.bat test`도 정상 통과했다.

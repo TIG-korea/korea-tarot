@@ -118,7 +118,7 @@
 - [X] T048 [P] [US3] Consultation과 ConsultationCard entity를 만든다: backend/src/main/java/com/koreatarot/consultation/entity/Consultation.java, backend/src/main/java/com/koreatarot/consultation/entity/ConsultationCard.java
 - [X] T049 [US3] idempotency service를 구현한다: backend/src/main/java/com/koreatarot/consultation/service/IdempotencyService.java
 - [X] T050 [US3] 상담 생성 service를 구현한다: backend/src/main/java/com/koreatarot/consultation/service/ConsultationService.java
-- [ ] T051 [US3] AI WebClient를 구현한다: backend/src/main/java/com/koreatarot/ai/client/AiInterpretationClient.java
+- [X] T051 [US3] AI WebClient를 구현한다: backend/src/main/java/com/koreatarot/ai/client/AiInterpretationClient.java
 - [ ] T052 [US3] SSE event service와 controller를 구현한다: backend/src/main/java/com/koreatarot/consultation/service/ConsultationEventService.java, backend/src/main/java/com/koreatarot/consultation/controller/ConsultationEventController.java
 - [ ] T053 [P] [US3] AI Pydantic 스키마를 구현한다: ai-server/app/schemas/interpretation.py
 - [ ] T054 [US3] AI 카드 해석 문서 조회 클라이언트를 구현한다: ai-server/app/services/card_docs.py

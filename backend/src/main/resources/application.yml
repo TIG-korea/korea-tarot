@@ -47,3 +47,5 @@ app:
     refresh-token-ttl-days: ${REFRESH_TOKEN_TTL_DAYS:7}
   ai:
     base-url: ${AI_SERVER_BASE_URL:http://localhost:8000}
+    stream-path: ${AI_SERVER_STREAM_PATH:/internal/v1/interpretations/stream}
+    timeout-seconds: ${AI_SERVER_TIMEOUT_SECONDS:30}
