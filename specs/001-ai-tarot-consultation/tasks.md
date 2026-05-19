@@ -187,7 +187,7 @@
 
 **목적**: 전체 MVP 품질, 관찰성, 배포 가능성을 검증한다.
 
-- [ ] T079 [P] 백엔드 OpenAPI 문서 설정을 추가한다: backend/src/main/java/com/koreatarot/global/openapi/OpenApiConfig.java
+- [X] T079 [P] 백엔드 OpenAPI 문서 설정을 추가한다: backend/src/main/java/com/koreatarot/global/openapi/OpenApiConfig.java
 - [ ] T080 [P] AI golden set 평가 script를 추가한다: ai-server/tests/golden/test_golden_set.py, ai-server/tests/golden/golden_set.json
 - [ ] T081 [P] Playwright 전체 핵심 흐름 E2E test를 추가한다: front/tests/core-flow.spec.ts
 - [ ] T082 k6 상담 스트리밍 부하 test를 추가한다: tests/load/consultation-stream.js
