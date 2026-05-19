@@ -53,24 +53,24 @@ Swagger/OpenAPI 문서화 작업 후 백엔드 컴파일과 테스트를 실행�
 제목:
 
 ```text
-백엔드 Gradle 검증 실행 환경 정리 필요
+백엔드 Gradle Wrapper 추가 및 검증 환경 복구 완료
 ```
 
 본문:
 
 ```markdown
-Swagger/OpenAPI 문서화 작업 후 백엔드 컴파일과 테스트를 실행하려 했지만, 현재 저장소에 `backend/gradlew`가 없고 작업 환경에도 `gradle` 명령이 설치되어 있지 않아 `gradle test` 검증을 수행하지 못했습니다.
+백엔드에 Gradle Wrapper가 없어 `gradle test` 검증을 수행하지 못하던 문제가 있었습니다.
 
-영향:
-- Java 소스 컴파일 검증을 로컬에서 즉시 수행할 수 없습니다.
-- Swagger composed annotation 적용 여부를 실제 빌드로 확인하지 못했습니다.
-- 이후 도메인 구현마다 검증 절차가 반복적으로 막힐 수 있습니다.
+처리 내용:
+- Gradle 8.10.2 기반 wrapper를 `backend/`에 추가했습니다.
+- `backend/gradlew`, `backend/gradlew.bat`, `backend/gradle/wrapper/`를 커밋 대상으로 포함했습니다.
+- `backend/gradlew.bat test`를 실행해 `compileJava`, `processResources`, `classes` 통과를 확인했습니다.
+- `ApiResponse` record의 static `success()` 컴파일 충돌을 발견해 `empty()`로 수정했습니다.
 
-확인 필요:
-- 프로젝트에 Gradle Wrapper를 추가할지 결정해야 합니다.
-- AGENTS 규칙상 `gradle wrapper` 등 빌드 도구 변경은 사용자 확인 후 진행해야 합니다.
-- Wrapper를 추가하지 않는다면 개발 환경 전제 조건에 로컬 Gradle 설치를 명시해야 합니다.
+남은 작업:
+- 현재 테스트 소스가 없어 Gradle 결과는 `test NO-SOURCE`입니다.
+- `T020`, `T021` 테스트 task는 별도 구현이 필요합니다.
 
 관련 커밋:
-- `3efd53c feat(global): add swagger documentation setup`
+- `f2f494c chore(backend): add gradle wrapper`
 ```
