@@ -2,6 +2,7 @@ package com.koreatarot.consultation.service;
 
 import com.koreatarot.ai.client.AiInterpretationClient;
 import com.koreatarot.ai.dto.AiInterpretationDto;
+import com.koreatarot.ai.service.AiRequestLogService;
 import com.koreatarot.consultation.dto.ConsultationEventDto;
 import com.koreatarot.consultation.entity.Consultation;
 import com.koreatarot.consultation.entity.ConsultationCard;
@@ -35,18 +36,21 @@ public class ConsultationEventService {
     private final ConsultationCardRepository consultationCardRepository;
     private final TarotCardRepository tarotCardRepository;
     private final AiInterpretationClient aiInterpretationClient;
+    private final AiRequestLogService aiRequestLogService;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     public ConsultationEventService(
             ConsultationRepository consultationRepository,
             ConsultationCardRepository consultationCardRepository,
             TarotCardRepository tarotCardRepository,
-            AiInterpretationClient aiInterpretationClient
+            AiInterpretationClient aiInterpretationClient,
+            AiRequestLogService aiRequestLogService
     ) {
         this.consultationRepository = consultationRepository;
         this.consultationCardRepository = consultationCardRepository;
         this.tarotCardRepository = tarotCardRepository;
         this.aiInterpretationClient = aiInterpretationClient;
+        this.aiRequestLogService = aiRequestLogService;
     }
 
     @Transactional
@@ -189,6 +193,14 @@ public class ConsultationEventService {
                     textOrNull(root, "documentVersion")
             );
             consultationRepository.save(consultation);
+            JsonNode usage = root.path("usage");
+            aiRequestLogService.logSuccess(
+                    consultation.getId(),
+                    textOrNull(root, "requestId"),
+                    intOrNull(usage, "inputTokens"),
+                    intOrNull(usage, "outputTokens"),
+                    intOrNull(usage, "latencyMs")
+            );
         } catch (Exception exception) {
             throw new BusinessException(ErrorCode.INTERNAL_SERVER_ERROR, "AI 완료 이벤트 저장에 실패했습니다.");
         }
@@ -200,6 +212,14 @@ public class ConsultationEventService {
             return null;
         }
         return value.asText();
+    }
+
+    private Integer intOrNull(JsonNode node, String fieldName) {
+        JsonNode value = node.path(fieldName);
+        if (value.isMissingNode() || value.isNull()) {
+            return null;
+        }
+        return value.asInt();
     }
 
     private ServerSentEvent<Object> errorEvent() {
@@ -215,6 +235,12 @@ public class ConsultationEventService {
     private Flux<ServerSentEvent<Object>> handleAiFailure(Consultation consultation) {
         consultation.fail();
         consultationRepository.save(consultation);
+        aiRequestLogService.logFailure(
+                consultation.getId(),
+                null,
+                AI_GENERATION_FAILED,
+                "해석 생성에 실패했습니다."
+        );
         return Flux.just(errorEvent());
     }
 }

@@ -2,6 +2,7 @@ package com.koreatarot.consultation;
 
 import com.koreatarot.ai.client.AiInterpretationClient;
 import com.koreatarot.ai.dto.AiInterpretationDto;
+import com.koreatarot.ai.service.AiRequestLogService;
 import com.koreatarot.consultation.dto.ConsultationEventDto;
 import com.koreatarot.consultation.entity.Consultation;
 import com.koreatarot.consultation.entity.ConsultationCard;
@@ -37,11 +38,13 @@ class ConsultationSseIntegrationTest {
     private final ConsultationCardRepository consultationCardRepository = mock(ConsultationCardRepository.class);
     private final TarotCardRepository tarotCardRepository = mock(TarotCardRepository.class);
     private final AiInterpretationClient aiInterpretationClient = mock(AiInterpretationClient.class);
+    private final AiRequestLogService aiRequestLogService = mock(AiRequestLogService.class);
     private final ConsultationEventService consultationEventService = new ConsultationEventService(
             consultationRepository,
             consultationCardRepository,
             tarotCardRepository,
-            aiInterpretationClient
+            aiInterpretationClient,
+            aiRequestLogService
     );
 
     @Test
@@ -136,6 +139,13 @@ class ConsultationSseIntegrationTest {
         assertThat(consultation.getRetrievedDocIds()).contains("card-lovers-present-v1");
         assertThat(consultation.getCompletedAt()).isNotNull();
         org.mockito.Mockito.verify(consultationRepository).save(consultation);
+        org.mockito.Mockito.verify(aiRequestLogService).logSuccess(
+                1001L,
+                "req-abc-123",
+                0,
+                0,
+                100
+        );
     }
 
     @Test
