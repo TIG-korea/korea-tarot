@@ -1,4 +1,4 @@
-package com.koreatarot.user;
+package com.koreatarot.user.enums;
 
 public enum UserStatus {
     ACTIVE,

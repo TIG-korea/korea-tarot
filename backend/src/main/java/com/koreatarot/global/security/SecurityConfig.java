@@ -1,10 +1,10 @@
 package com.koreatarot.global.security;
 
-import com.koreatarot.auth.AuthProperties;
-import com.koreatarot.auth.JwtAuthenticationFilter;
+import com.koreatarot.auth.config.AuthProperties;
+import com.koreatarot.auth.security.JwtAuthenticationFilter;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;

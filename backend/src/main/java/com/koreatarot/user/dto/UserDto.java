@@ -1,4 +1,7 @@
-package com.koreatarot.user;
+package com.koreatarot.user.dto;
+
+import com.koreatarot.user.entity.User;
+import com.koreatarot.user.enums.UserStatus;
 
 import java.time.LocalDateTime;
 

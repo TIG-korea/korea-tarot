@@ -135,3 +135,45 @@ docker-compose.yml
 | 위반 | 필요한 이유 | 더 단순한 대안을 거절한 이유 |
 |------|-------------|------------------------------|
 | 없음 | 해당 없음 | 해당 없음 |
+
+## 백엔드 패키지 구조 최신 기준
+
+도메인 패키지는 도메인 루트에 모든 클래스를 직접 배치하지 않고 역할별 하위 패키지로 분리한다.
+
+```text
+backend/src/main/java/com/koreatarot/{domain}/
+  controller/   HTTP endpoint와 Swagger docs annotation
+  dto/          Request/Response DTO 및 cursor 같은 전송 모델
+  service/      비즈니스 흐름, 트랜잭션, 외부 저장소 연동
+  entity/       JPA Entity
+  repository/   Spring Data Repository
+  enums/        상태값과 코드값 enum
+  config/       도메인 설정 properties/config
+  security/     인증 principal, token filter, token service
+  client/       외부 서버 호출 client
+```
+
+현재 인증/사용자 도메인은 다음 구조를 따른다.
+
+```text
+auth/
+  controller/AuthController.java
+  dto/AuthDto.java
+  service/AuthService.java
+  service/PasswordService.java
+  service/PasswordValidator.java
+  security/AuthenticatedUser.java
+  security/JwtAuthenticationFilter.java
+  security/JwtTokenService.java
+  security/RefreshTokenService.java
+  config/AuthProperties.java
+
+user/
+  controller/UserController.java
+  dto/UserDto.java
+  entity/User.java
+  repository/UserRepository.java
+  enums/UserStatus.java
+```
+
+이후 `tarot`, `consultation`, `ai` 도메인도 동일한 역할별 하위 패키지 기준으로 구현한다. 단, 해당 역할의 클래스가 아직 없으면 빈 패키지를 만들지 않는다.

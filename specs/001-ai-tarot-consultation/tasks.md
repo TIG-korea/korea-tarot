@@ -52,18 +52,18 @@
 
 ### 사용자 스토리 1 테스트
 
-- [X] T020 [P] [US1] 인증 contract test를 작성한다: backend/src/test/java/com/koreatarot/auth/AuthContractTest.java
-- [X] T021 [P] [US1] 내 정보 조회 통합 테스트를 작성한다: backend/src/test/java/com/koreatarot/user/UserProfileIntegrationTest.java
+- [X] T020 [P] [US1] 인증 contract test를 작성한다: backend/src/test/java/com/koreatarot/auth/controller/AuthContractTest.java
+- [X] T021 [P] [US1] 내 정보 조회 통합 테스트를 작성한다: backend/src/test/java/com/koreatarot/user/controller/UserProfileIntegrationTest.java
 - [ ] T022 [P] [US1] 프론트엔드 회원가입/로그인 E2E test를 작성한다: front/tests/auth.spec.ts
 
 ### 사용자 스토리 1 구현
 
-- [X] T023 [P] [US1] User entity와 repository를 만든다: backend/src/main/java/com/koreatarot/user/User.java, backend/src/main/java/com/koreatarot/user/UserRepository.java
-- [X] T024 [US1] 비밀번호 hashing과 검증을 구현한다: backend/src/main/java/com/koreatarot/auth/PasswordService.java, backend/src/main/java/com/koreatarot/auth/PasswordValidator.java
-- [X] T025 [US1] JWT와 refresh token service를 구현한다: backend/src/main/java/com/koreatarot/auth/JwtTokenService.java, backend/src/main/java/com/koreatarot/auth/RefreshTokenService.java
-- [X] T026 [US1] 회원가입, 로그인, refresh, logout service를 구현한다: backend/src/main/java/com/koreatarot/auth/AuthService.java
-- [X] T027 [US1] 인증 controller와 DTO를 구현한다: backend/src/main/java/com/koreatarot/auth/AuthController.java
-- [X] T028 [US1] 내 정보 API를 구현한다: backend/src/main/java/com/koreatarot/user/UserController.java
+- [X] T023 [P] [US1] User entity와 repository를 만든다: backend/src/main/java/com/koreatarot/user/entity/User.java, backend/src/main/java/com/koreatarot/user/repository/UserRepository.java
+- [X] T024 [US1] 비밀번호 hashing과 검증을 구현한다: backend/src/main/java/com/koreatarot/auth/service/PasswordService.java, backend/src/main/java/com/koreatarot/auth/service/PasswordValidator.java
+- [X] T025 [US1] JWT와 refresh token service를 구현한다: backend/src/main/java/com/koreatarot/auth/security/JwtTokenService.java, backend/src/main/java/com/koreatarot/auth/security/RefreshTokenService.java
+- [X] T026 [US1] 회원가입, 로그인, refresh, logout service를 구현한다: backend/src/main/java/com/koreatarot/auth/service/AuthService.java
+- [X] T027 [US1] 인증 controller와 DTO를 구현한다: backend/src/main/java/com/koreatarot/auth/controller/AuthController.java
+- [X] T028 [US1] 내 정보 API를 구현한다: backend/src/main/java/com/koreatarot/user/controller/UserController.java
 - [X] T029 [US1] 인증 API 모듈을 구현한다: front/src/api/auth.ts
 - [X] T030 [US1] 인증 상태 저장소를 구현한다: front/src/stores/authStore.ts
 - [ ] T031 [US1] 메인, 회원가입, 로그인 화면을 구현한다: front/app/page.tsx, front/app/signup/page.tsx, front/app/login/page.tsx
@@ -86,12 +86,12 @@
 
 ### 사용자 스토리 2 구현
 
-- [ ] T035 [P] [US2] TarotCard와 CardInterpretation entity를 만든다: backend/src/main/java/com/koreatarot/tarot/TarotCard.java, backend/src/main/java/com/koreatarot/tarot/CardInterpretation.java
-- [ ] T036 [US2] 카드 목록 API를 구현한다: backend/src/main/java/com/koreatarot/tarot/TarotCardController.java
-- [ ] T037 [US2] 고민 validator를 구현한다: backend/src/main/java/com/koreatarot/consultation/ConcernValidator.java
-- [ ] T038 [US2] DraftDeck Redis service를 구현한다: backend/src/main/java/com/koreatarot/consultation/DraftDeckService.java
-- [ ] T039 [US2] draft 생성 엔드포인트를 구현한다: backend/src/main/java/com/koreatarot/consultation/ConsultationDraftController.java
-- [ ] T040 [US2] 카드 선택 검증을 구현한다: backend/src/main/java/com/koreatarot/consultation/CardSelectionValidator.java
+- [ ] T035 [P] [US2] TarotCard와 CardInterpretation entity를 만든다: backend/src/main/java/com/koreatarot/tarot/entity/TarotCard.java, backend/src/main/java/com/koreatarot/tarot/entity/CardInterpretation.java
+- [ ] T036 [US2] 카드 목록 API를 구현한다: backend/src/main/java/com/koreatarot/tarot/controller/TarotCardController.java
+- [ ] T037 [US2] 고민 validator를 구현한다: backend/src/main/java/com/koreatarot/consultation/service/ConcernValidator.java
+- [ ] T038 [US2] DraftDeck Redis service를 구현한다: backend/src/main/java/com/koreatarot/consultation/service/DraftDeckService.java
+- [ ] T039 [US2] draft 생성 엔드포인트를 구현한다: backend/src/main/java/com/koreatarot/consultation/controller/ConsultationDraftController.java
+- [ ] T040 [US2] 카드 선택 검증을 구현한다: backend/src/main/java/com/koreatarot/consultation/service/CardSelectionValidator.java
 - [ ] T041 [US2] 상담 API module을 구현한다: front/src/api/consultations.ts
 - [ ] T042 [US2] 고민 입력 화면을 구현한다: front/app/consultations/new/page.tsx
 - [ ] T043 [US2] 카드 선택 화면을 구현한다: front/app/consultations/select/page.tsx
@@ -115,11 +115,11 @@
 
 ### 사용자 스토리 3 구현
 
-- [ ] T048 [P] [US3] Consultation과 ConsultationCard entity를 만든다: backend/src/main/java/com/koreatarot/consultation/Consultation.java, backend/src/main/java/com/koreatarot/consultation/ConsultationCard.java
-- [ ] T049 [US3] idempotency service를 구현한다: backend/src/main/java/com/koreatarot/consultation/IdempotencyService.java
-- [ ] T050 [US3] 상담 생성 service를 구현한다: backend/src/main/java/com/koreatarot/consultation/ConsultationService.java
-- [ ] T051 [US3] AI WebClient를 구현한다: backend/src/main/java/com/koreatarot/ai/AiInterpretationClient.java
-- [ ] T052 [US3] SSE event service와 controller를 구현한다: backend/src/main/java/com/koreatarot/consultation/ConsultationEventService.java, backend/src/main/java/com/koreatarot/consultation/ConsultationEventController.java
+- [ ] T048 [P] [US3] Consultation과 ConsultationCard entity를 만든다: backend/src/main/java/com/koreatarot/consultation/entity/Consultation.java, backend/src/main/java/com/koreatarot/consultation/entity/ConsultationCard.java
+- [ ] T049 [US3] idempotency service를 구현한다: backend/src/main/java/com/koreatarot/consultation/service/IdempotencyService.java
+- [ ] T050 [US3] 상담 생성 service를 구현한다: backend/src/main/java/com/koreatarot/consultation/service/ConsultationService.java
+- [ ] T051 [US3] AI WebClient를 구현한다: backend/src/main/java/com/koreatarot/ai/client/AiInterpretationClient.java
+- [ ] T052 [US3] SSE event service와 controller를 구현한다: backend/src/main/java/com/koreatarot/consultation/service/ConsultationEventService.java, backend/src/main/java/com/koreatarot/consultation/controller/ConsultationEventController.java
 - [ ] T053 [P] [US3] AI Pydantic 스키마를 구현한다: ai-server/app/schemas/interpretation.py
 - [ ] T054 [US3] AI 카드 해석 문서 조회 클라이언트를 구현한다: ai-server/app/services/card_docs.py
 - [ ] T055 [US3] AI 카테고리 및 안전 분류기를 구현한다: ai-server/app/services/classifier.py
@@ -146,9 +146,9 @@
 
 ### 사용자 스토리 4 구현
 
-- [ ] T063 [US4] 기록 조회 service를 구현한다: backend/src/main/java/com/koreatarot/consultation/ConsultationHistoryService.java
-- [ ] T064 [US4] 기록 목록, 상세, 삭제 엔드포인트를 구현한다: backend/src/main/java/com/koreatarot/consultation/ConsultationHistoryController.java
-- [ ] T065 [US4] cursor pagination을 구현한다: backend/src/main/java/com/koreatarot/consultation/ConsultationCursor.java
+- [ ] T063 [US4] 기록 조회 service를 구현한다: backend/src/main/java/com/koreatarot/consultation/service/ConsultationHistoryService.java
+- [ ] T064 [US4] 기록 목록, 상세, 삭제 엔드포인트를 구현한다: backend/src/main/java/com/koreatarot/consultation/controller/ConsultationHistoryController.java
+- [ ] T065 [US4] cursor pagination을 구현한다: backend/src/main/java/com/koreatarot/consultation/dto/ConsultationCursor.java
 - [ ] T066 [US4] 기록 API module을 구현한다: front/src/api/history.ts
 - [ ] T067 [US4] 기록 목록 화면을 구현한다: front/app/history/page.tsx
 - [ ] T068 [US4] 기록 상세 화면을 구현한다: front/app/history/[id]/page.tsx
@@ -165,16 +165,16 @@
 
 ### 사용자 스토리 5 테스트
 
-- [ ] T069 [P] [US5] 회원 탈퇴 통합 테스트를 작성한다: backend/src/test/java/com/koreatarot/user/UserWithdrawalIntegrationTest.java
+- [ ] T069 [P] [US5] 회원 탈퇴 통합 테스트를 작성한다: backend/src/test/java/com/koreatarot/user/controller/UserWithdrawalIntegrationTest.java
 - [ ] T070 [P] [US5] rate-limit integration test를 작성한다: backend/src/test/java/com/koreatarot/global/RateLimitIntegrationTest.java
 - [ ] T071 [P] [US5] AI safety test를 작성한다: ai-server/tests/test_safety.py
 - [ ] T072 [P] [US5] 프론트엔드 마이페이지 E2E test를 작성한다: front/tests/my-page.spec.ts
 
 ### 사용자 스토리 5 구현
 
-- [ ] T073 [US5] 회원 탈퇴 service를 구현한다: backend/src/main/java/com/koreatarot/user/UserWithdrawalService.java
+- [ ] T073 [US5] 회원 탈퇴 service를 구현한다: backend/src/main/java/com/koreatarot/user/service/UserWithdrawalService.java
 - [ ] T074 [US5] rate limiting filter와 policy를 구현한다: backend/src/main/java/com/koreatarot/global/ratelimit/RateLimitConfig.java, backend/src/main/java/com/koreatarot/global/ratelimit/RateLimitFilter.java
-- [ ] T075 [US5] AI 요청 로그 엔티티와 서비스를 구현한다: backend/src/main/java/com/koreatarot/ai/AiRequestLogService.java
+- [ ] T075 [US5] AI 요청 로그 엔티티와 서비스를 구현한다: backend/src/main/java/com/koreatarot/ai/service/AiRequestLogService.java
 - [ ] T076 [US5] AI 민감 주제 안전 처리를 구현한다: ai-server/app/services/safety.py
 - [ ] T077 [US5] 마이페이지를 구현한다: front/app/me/page.tsx
 - [ ] T078 [US5] 필수 안전 및 개인정보 안내 문구 컴포넌트를 추가한다: front/src/features/consultations/SafetyNotice.tsx, front/src/features/consultations/PrivacyNotice.tsx

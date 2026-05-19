@@ -3,12 +3,66 @@
 ## 프론트엔드 UI 작업 기준
 
 - 프론트엔드 UI는 사용자가 이미 구현한 화면과 컴포넌트를 우선 사용한다.
-- 기능 구현 시 새 UI를 임의로 생성하지 않는다.
-- 기존 `front/` 구조를 먼저 읽고 API 연동, 상태 관리, 라우팅, 폼 검증, SSE 수신 같은 기능 연결만 수행한다.
+- 기능 구현 중 새 UI를 임의로 생성하지 않는다.
+- 기존 `front/` 구조를 먼저 읽고 API 연동, 상태 관리, 라우팅, 검증, SSE 수신 같은 기능 연결만 수행한다.
 - 레이아웃, 디자인, 텍스트, 스타일은 기존 구현을 최대한 유지한다.
-- 필요한 최소 UI 수정이 있으면 수정 전에 어떤 파일을 왜 수정하는지 먼저 보고한다.
-- API 호출은 기존 규칙대로 `front/src/api/` 내부 모듈을 통해 연결한다.
+- 필요한 최소 UI 수정이 있으면 수정 전에 어떤 파일을 수정하는지 먼저 보고한다.
+- API 호출은 `front/src/api/` 내부 모듈을 통해 연결한다.
 - 폼 검증은 기존 규칙대로 `front/src/utils/validators.ts` 또는 기존 검증 구조에 맞춘다.
+
+## 백엔드 패키지 구조 기준
+
+도메인 패키지는 역할별 하위 패키지로 나눈다. 도메인 루트에 모든 클래스를 평면 배치하지 않는다.
+
+기본 구조:
+
+```text
+com.koreatarot.{domain}/
+  controller/
+  dto/
+  service/
+  entity/
+  repository/
+  enums/
+  config/
+  security/
+```
+
+적용 기준:
+
+- `controller`: HTTP endpoint와 Swagger docs annotation 적용 클래스.
+- `dto`: Request/Response DTO. 기존 규칙대로 관련 Request/Response는 하나의 DTO 클래스 안에 inner record로 묶는다.
+- `service`: 비즈니스 흐름, 트랜잭션, 외부 저장소 연동 로직.
+- `entity`: JPA Entity.
+- `repository`: Spring Data Repository.
+- `enums`: 상태값, 코드값 enum.
+- `config`: 도메인 설정 properties/config.
+- `security`: 인증 principal, token filter, token service 등 보안 관련 클래스.
+
+현재 정리된 예시:
+
+```text
+auth/
+  controller/AuthController.java
+  dto/AuthDto.java
+  service/AuthService.java
+  service/PasswordService.java
+  service/PasswordValidator.java
+  security/AuthenticatedUser.java
+  security/JwtAuthenticationFilter.java
+  security/JwtTokenService.java
+  security/RefreshTokenService.java
+  config/AuthProperties.java
+
+user/
+  controller/UserController.java
+  dto/UserDto.java
+  entity/User.java
+  repository/UserRepository.java
+  enums/UserStatus.java
+```
+
+다음 도메인(`tarot`, `consultation`, `ai`)도 위 구조를 따른다. 단, 해당 역할의 클래스가 아직 없으면 빈 패키지를 만들지 않는다.
 
 ## 구현 진행 기준
 

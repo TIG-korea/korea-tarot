@@ -1,4 +1,4 @@
-package com.koreatarot.auth;
+package com.koreatarot.auth.security;
 
 public record AuthenticatedUser(
         Long id,

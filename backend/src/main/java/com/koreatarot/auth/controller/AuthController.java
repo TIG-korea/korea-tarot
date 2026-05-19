@@ -1,5 +1,8 @@
-package com.koreatarot.auth;
+package com.koreatarot.auth.controller;
 
+import com.koreatarot.auth.config.AuthProperties;
+import com.koreatarot.auth.dto.AuthDto;
+import com.koreatarot.auth.service.AuthService;
 import com.koreatarot.global.api.ApiResponse;
 import com.koreatarot.global.openapi.docs.AuthApiDocs;
 import jakarta.servlet.http.HttpServletResponse;

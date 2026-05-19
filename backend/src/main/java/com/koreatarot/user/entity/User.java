@@ -1,5 +1,6 @@
-package com.koreatarot.user;
+package com.koreatarot.user.entity;
 
+import com.koreatarot.user.enums.UserStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

@@ -1,5 +1,6 @@
-package com.koreatarot.user;
+package com.koreatarot.user.repository;
 
+import com.koreatarot.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

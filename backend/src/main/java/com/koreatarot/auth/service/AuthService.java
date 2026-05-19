@@ -1,9 +1,12 @@
-package com.koreatarot.auth;
+package com.koreatarot.auth.service;
 
+import com.koreatarot.auth.dto.AuthDto;
+import com.koreatarot.auth.security.JwtTokenService;
+import com.koreatarot.auth.security.RefreshTokenService;
 import com.koreatarot.global.error.BusinessException;
 import com.koreatarot.global.error.ErrorCode;
-import com.koreatarot.user.User;
-import com.koreatarot.user.UserRepository;
+import com.koreatarot.user.entity.User;
+import com.koreatarot.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

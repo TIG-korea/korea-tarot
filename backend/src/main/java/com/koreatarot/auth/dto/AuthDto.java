@@ -1,6 +1,6 @@
-package com.koreatarot.auth;
+package com.koreatarot.auth.dto;
 
-import com.koreatarot.user.User;
+import com.koreatarot.user.entity.User;
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

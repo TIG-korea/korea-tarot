@@ -1,4 +1,4 @@
-package com.koreatarot.auth;
+package com.koreatarot.auth.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

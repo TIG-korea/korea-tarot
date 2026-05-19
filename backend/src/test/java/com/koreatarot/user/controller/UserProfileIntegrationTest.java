@@ -1,8 +1,12 @@
-package com.koreatarot.user;
+package com.koreatarot.user.controller;
 
-import com.koreatarot.auth.AuthenticatedUser;
+import com.koreatarot.auth.security.AuthenticatedUser;
 import com.koreatarot.global.api.ApiResponse;
 import com.koreatarot.global.error.BusinessException;
+import com.koreatarot.user.dto.UserDto;
+import com.koreatarot.user.entity.User;
+import com.koreatarot.user.enums.UserStatus;
+import com.koreatarot.user.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.util.ReflectionTestUtils;
 

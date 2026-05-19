@@ -1,4 +1,4 @@
-package com.koreatarot.auth;
+package com.koreatarot.auth.service;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
