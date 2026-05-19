@@ -176,8 +176,8 @@
 - [X] T074 [US5] rate limiting filter와 policy를 구현한다: backend/src/main/java/com/koreatarot/global/ratelimit/RateLimitConfig.java, backend/src/main/java/com/koreatarot/global/ratelimit/RateLimitFilter.java
 - [X] T075 [US5] AI 요청 로그 엔티티와 서비스를 구현한다: backend/src/main/java/com/koreatarot/ai/service/AiRequestLogService.java
 - [X] T076 [US5] AI 민감 주제 안전 처리를 구현한다: ai-server/app/services/safety.py
-- [ ] T077 [US5] 마이페이지를 구현한다: front/app/me/page.tsx
-- [ ] T078 [US5] 필수 안전 및 개인정보 안내 문구 컴포넌트를 추가한다: front/src/features/consultations/SafetyNotice.tsx, front/src/features/consultations/PrivacyNotice.tsx
+- [X] T077 [US5] 마이페이지를 구현한다: front/app/me/page.tsx
+- [X] T078 [US5] 필수 안전 및 개인정보 안내 문구 컴포넌트를 추가한다: front/src/features/consultations/SafetyNotice.tsx, front/src/features/consultations/PrivacyNotice.tsx
 
 **체크포인트**: 계정 생명주기와 안전 가드레일이 적용된다.
 

@@ -4,6 +4,7 @@ import {
   getProfile,
   login,
   logout,
+  requestWithdrawal,
   refreshToken,
   signup,
   type AuthUser,
@@ -26,6 +27,7 @@ interface AuthState {
   refresh: () => Promise<void>;
   loadProfile: () => Promise<void>;
   logout: () => Promise<void>;
+  requestWithdrawal: () => Promise<void>;
 }
 
 export const useAuthStore = create<AuthState>((set, get) => ({
@@ -114,5 +116,10 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     } finally {
       get().clearSession();
     }
+  },
+
+  requestWithdrawal: async () => {
+    await requestWithdrawal();
+    get().clearSession();
   }
 }));

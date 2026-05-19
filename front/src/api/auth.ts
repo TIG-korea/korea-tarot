@@ -75,3 +75,7 @@ export async function getProfile() {
   const response = await apiClient.get<ApiResponse<ProfileResponse>>("/users/me");
   return response.data.data;
 }
+
+export async function requestWithdrawal() {
+  await apiClient.post<ApiResponse<null>>("/users/me/withdrawal");
+}
