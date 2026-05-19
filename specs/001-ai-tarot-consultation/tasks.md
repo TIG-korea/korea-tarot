@@ -121,7 +121,7 @@
 - [X] T051 [US3] AI WebClient를 구현한다: backend/src/main/java/com/koreatarot/ai/client/AiInterpretationClient.java
 - [X] T052 [US3] SSE event service와 controller를 구현한다: backend/src/main/java/com/koreatarot/consultation/service/ConsultationEventService.java, backend/src/main/java/com/koreatarot/consultation/controller/ConsultationEventController.java
 - [X] T053 [P] [US3] AI Pydantic 스키마를 구현한다: ai-server/app/schemas/interpretation.py
-- [ ] T054 [US3] AI 카드 해석 문서 조회 클라이언트를 구현한다: ai-server/app/services/card_docs.py
+- [X] T054 [US3] AI 카드 해석 문서 조회 클라이언트를 구현한다: ai-server/app/services/card_docs.py
 - [ ] T055 [US3] AI 카테고리 및 안전 분류기를 구현한다: ai-server/app/services/classifier.py
 - [ ] T056 [US3] prompt template을 구현한다: ai-server/app/prompts/tarot_v1.py
 - [ ] T057 [US3] streaming interpretation 엔드포인트를 구현한다: ai-server/app/api/interpretations.py
