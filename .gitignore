@@ -23,6 +23,7 @@ backend/build/
 backend/.gradle/
 *.class
 *.jar
+!backend/gradle/wrapper/gradle-wrapper.jar
 
 # Node / Next.js
 front/node_modules/
@@ -40,4 +41,3 @@ ai-server/.venv/
 ai-server/venv/
 ai-server/dist/
 ai-server/*.egg-info/
-

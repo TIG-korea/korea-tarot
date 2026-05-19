@@ -10,7 +10,7 @@ public record ApiResponse<T>(
         return new ApiResponse<>(true, data, null);
     }
 
-    public static ApiResponse<Void> success() {
+    public static ApiResponse<Void> empty() {
         return new ApiResponse<>(true, null, null);
     }
 

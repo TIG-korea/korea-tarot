@@ -70,7 +70,7 @@ public class AuthController {
     ) {
         authService.logout(refreshToken);
         expireRefreshCookie(response);
-        return ApiResponse.success();
+        return ApiResponse.empty();
     }
 
     private void addRefreshCookie(HttpServletResponse response, String refreshToken) {
