@@ -166,14 +166,14 @@
 ### 사용자 스토리 5 테스트
 
 - [X] T069 [P] [US5] 회원 탈퇴 통합 테스트를 작성한다: backend/src/test/java/com/koreatarot/user/controller/UserWithdrawalIntegrationTest.java
-- [ ] T070 [P] [US5] rate-limit integration test를 작성한다: backend/src/test/java/com/koreatarot/global/RateLimitIntegrationTest.java
+- [X] T070 [P] [US5] rate-limit integration test를 작성한다: backend/src/test/java/com/koreatarot/global/RateLimitIntegrationTest.java
 - [ ] T071 [P] [US5] AI safety test를 작성한다: ai-server/tests/test_safety.py
 - [ ] T072 [P] [US5] 프론트엔드 마이페이지 E2E test를 작성한다: front/tests/my-page.spec.ts
 
 ### 사용자 스토리 5 구현
 
 - [X] T073 [US5] 회원 탈퇴 service를 구현한다: backend/src/main/java/com/koreatarot/user/service/UserWithdrawalService.java
-- [ ] T074 [US5] rate limiting filter와 policy를 구현한다: backend/src/main/java/com/koreatarot/global/ratelimit/RateLimitConfig.java, backend/src/main/java/com/koreatarot/global/ratelimit/RateLimitFilter.java
+- [X] T074 [US5] rate limiting filter와 policy를 구현한다: backend/src/main/java/com/koreatarot/global/ratelimit/RateLimitConfig.java, backend/src/main/java/com/koreatarot/global/ratelimit/RateLimitFilter.java
 - [ ] T075 [US5] AI 요청 로그 엔티티와 서비스를 구현한다: backend/src/main/java/com/koreatarot/ai/service/AiRequestLogService.java
 - [ ] T076 [US5] AI 민감 주제 안전 처리를 구현한다: ai-server/app/services/safety.py
 - [ ] T077 [US5] 마이페이지를 구현한다: front/app/me/page.tsx
