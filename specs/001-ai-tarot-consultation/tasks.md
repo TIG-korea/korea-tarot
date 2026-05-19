@@ -91,7 +91,7 @@
 - [X] T037 [US2] 고민 validator를 구현한다: backend/src/main/java/com/koreatarot/consultation/service/ConcernValidator.java
 - [X] T038 [US2] DraftDeck Redis service를 구현한다: backend/src/main/java/com/koreatarot/consultation/service/DraftDeckService.java
 - [X] T039 [US2] draft 생성 엔드포인트를 구현한다: backend/src/main/java/com/koreatarot/consultation/controller/ConsultationDraftController.java
-- [ ] T040 [US2] 카드 선택 검증을 구현한다: backend/src/main/java/com/koreatarot/consultation/service/CardSelectionValidator.java
+- [X] T040 [US2] 카드 선택 검증을 구현한다: backend/src/main/java/com/koreatarot/consultation/service/CardSelectionValidator.java
 - [ ] T041 [US2] 상담 API module을 구현한다: front/src/api/consultations.ts
 - [ ] T042 [US2] 고민 입력 화면을 구현한다: front/app/consultations/new/page.tsx
 - [ ] T043 [US2] 카드 선택 화면을 구현한다: front/app/consultations/select/page.tsx
