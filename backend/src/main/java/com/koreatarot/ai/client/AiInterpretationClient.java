@@ -8,6 +8,7 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.codec.ServerSentEvent;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
@@ -24,6 +25,7 @@ public class AiInterpretationClient {
     private final WebClient webClient;
     private final AiProperties aiProperties;
 
+    @Autowired
     public AiInterpretationClient(WebClient.Builder webClientBuilder, AiProperties aiProperties) {
         this(webClientBuilder.baseUrl(aiProperties.baseUrl()).build(), aiProperties);
     }
