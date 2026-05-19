@@ -21,7 +21,7 @@ public final class TarotApiDocs {
 
     @Target(ElementType.METHOD)
     @Retention(RetentionPolicy.RUNTIME)
-    @Operation(summary = "타로 카드 목록 조회", description = "카드 도감 또는 완료된 리딩 표시에 사용할 카드 목록을 조회합니다.")
+    @Operation(summary = "타로 카드 목록 조회", description = "카드 도감 또는 완료된 리딩 표시에 사용할 메이저 아르카나 카드 목록을 조회합니다.")
     @ApiResponse(responseCode = "200", description = "조회 성공",
             content = @Content(mediaType = "application/json",
                     examples = @ExampleObject(value = OpenApiExamples.CARD_LIST_RESPONSE)))
