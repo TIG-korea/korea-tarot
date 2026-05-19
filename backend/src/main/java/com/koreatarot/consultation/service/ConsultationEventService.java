@@ -11,6 +11,8 @@ import com.koreatarot.global.error.BusinessException;
 import com.koreatarot.global.error.ErrorCode;
 import com.koreatarot.tarot.entity.TarotCard;
 import com.koreatarot.tarot.repository.TarotCardRepository;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.codec.ServerSentEvent;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,11 +29,13 @@ public class ConsultationEventService {
 
     private static final String LOCALE_KO = "ko";
     private static final String AI_GENERATION_FAILED = "AI_GENERATION_FAILED";
+    private static final String DONE_EVENT = "done";
 
     private final ConsultationRepository consultationRepository;
     private final ConsultationCardRepository consultationCardRepository;
     private final TarotCardRepository tarotCardRepository;
     private final AiInterpretationClient aiInterpretationClient;
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     public ConsultationEventService(
             ConsultationRepository consultationRepository,
@@ -63,18 +67,31 @@ public class ConsultationEventService {
 
         return Flux.concat(
                         Flux.just(ServerSentEvent.builder((Object) metaEvent).event("meta").build()),
-                        aiEvents(aiRequest)
+                        aiEvents(aiRequest, consultation)
                 )
                 .onErrorResume(throwable -> handleAiFailure(consultation));
     }
 
-    private Flux<ServerSentEvent<Object>> aiEvents(AiInterpretationDto.StreamRequest aiRequest) {
+    private Flux<ServerSentEvent<Object>> aiEvents(
+            AiInterpretationDto.StreamRequest aiRequest,
+            Consultation consultation
+    ) {
         try {
             return aiInterpretationClient.streamInterpretation(aiRequest)
-                    .map(this::copyEvent);
+                    .map(event -> handleAiEvent(event, consultation));
         } catch (RuntimeException exception) {
             return Flux.error(exception);
         }
+    }
+
+    private ServerSentEvent<Object> handleAiEvent(
+            ServerSentEvent<String> source,
+            Consultation consultation
+    ) {
+        if (DONE_EVENT.equals(source.event()) && source.data() != null) {
+            completeConsultation(consultation, source.data());
+        }
+        return copyEvent(source);
     }
 
     private List<Long> toCardIds(List<ConsultationCard> consultationCards) {
@@ -151,6 +168,38 @@ public class ConsultationEventService {
             builder.comment(source.comment());
         }
         return builder.build();
+    }
+
+    private void completeConsultation(Consultation consultation, String donePayload) {
+        try {
+            JsonNode root = objectMapper.readTree(donePayload);
+            JsonNode result = root.path("result");
+            if (result.isMissingNode() || result.isNull()) {
+                throw new IllegalArgumentException("AI done payload result is missing");
+            }
+
+            consultation.complete(
+                    textOrNull(root, "category"),
+                    textOrNull(result, "summary"),
+                    objectMapper.writeValueAsString(result),
+                    objectMapper.writeValueAsString(root.path("retrievedDocIds")),
+                    textOrNull(root, "modelName"),
+                    textOrNull(root, "modelProvider"),
+                    textOrNull(root, "promptVersion"),
+                    textOrNull(root, "documentVersion")
+            );
+            consultationRepository.save(consultation);
+        } catch (Exception exception) {
+            throw new BusinessException(ErrorCode.INTERNAL_SERVER_ERROR, "AI 완료 이벤트 저장에 실패했습니다.");
+        }
+    }
+
+    private String textOrNull(JsonNode node, String fieldName) {
+        JsonNode value = node.path(fieldName);
+        if (value.isMissingNode() || value.isNull()) {
+            return null;
+        }
+        return value.asText();
     }
 
     private ServerSentEvent<Object> errorEvent() {

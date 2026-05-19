@@ -112,6 +112,33 @@ class ConsultationSseIntegrationTest {
     }
 
     @Test
+    void streamSavesResultWhenDoneEventArrives() {
+        Consultation consultation = consultation(1L, 1001L);
+
+        when(consultationRepository.findByIdAndUserIdAndDeletedAtIsNull(1001L, 1L))
+                .thenReturn(Optional.of(consultation));
+        when(consultationCardRepository.findByConsultationIdOrderByPositionOrderAsc(1001L))
+                .thenReturn(consultationCards(1001L));
+        when(tarotCardRepository.findAllById(List.of(6L, 18L, 14L))).thenReturn(tarotCards());
+        when(aiInterpretationClient.streamInterpretation(any()))
+                .thenReturn(Flux.just(ServerSentEvent.builder(donePayload()).event("done").build()));
+
+        List<ServerSentEvent<Object>> events = consultationEventService.stream(1L, 1001L)
+                .collectList()
+                .block();
+
+        assertThat(events).hasSize(2);
+        assertThat(events.get(1).event()).isEqualTo("done");
+        assertThat(consultation.getStatus()).isEqualTo(ConsultationStatus.COMPLETED);
+        assertThat(consultation.getCategoryCode()).isEqualTo("love");
+        assertThat(consultation.getResultSummary()).isEqualTo("관계에 대한 중요한 선택의 시기입니다.");
+        assertThat(consultation.getResultDetail()).contains("\"summary\"");
+        assertThat(consultation.getRetrievedDocIds()).contains("card-lovers-present-v1");
+        assertThat(consultation.getCompletedAt()).isNotNull();
+        org.mockito.Mockito.verify(consultationRepository).save(consultation);
+    }
+
+    @Test
     void streamRejectsNonOwnerConsultation() {
         when(consultationRepository.findByIdAndUserIdAndDeletedAtIsNull(1001L, 2L))
                 .thenReturn(Optional.empty());
@@ -173,5 +200,32 @@ class ConsultationSseIntegrationTest {
                 .build();
         ReflectionTestUtils.setField(tarotCard, "id", id);
         return tarotCard;
+    }
+
+    private String donePayload() {
+        return """
+                {
+                  "requestId": "req-abc-123",
+                  "status": "success",
+                  "category": "love",
+                  "modelName": "mock-tarot-v1",
+                  "modelProvider": "mock",
+                  "promptVersion": "tarot-v1.0",
+                  "documentVersion": "tarot-doc-v1.0",
+                  "retrievedDocIds": ["card-lovers-present-v1"],
+                  "result": {
+                    "summary": "관계에 대한 중요한 선택의 시기입니다.",
+                    "overall": "전체 흐름 해석입니다.",
+                    "cards": [],
+                    "advice": "현실적인 조언입니다.",
+                    "caution": "주의할 점입니다."
+                  },
+                  "usage": {
+                    "inputTokens": 0,
+                    "outputTokens": 0,
+                    "latencyMs": 100
+                  }
+                }
+                """;
     }
 }

@@ -110,4 +110,28 @@ public class Consultation {
             this.updatedAt = LocalDateTime.now();
         }
     }
+
+    public void complete(
+            String categoryCode,
+            String resultSummary,
+            String resultDetail,
+            String retrievedDocIds,
+            String modelName,
+            String modelProvider,
+            String promptVersion,
+            String documentVersion
+    ) {
+        LocalDateTime now = LocalDateTime.now();
+        this.categoryCode = categoryCode;
+        this.resultSummary = resultSummary;
+        this.resultDetail = resultDetail;
+        this.retrievedDocIds = retrievedDocIds;
+        this.modelName = modelName;
+        this.modelProvider = modelProvider;
+        this.promptVersion = promptVersion;
+        this.documentVersion = documentVersion;
+        this.status = ConsultationStatus.COMPLETED;
+        this.completedAt = now;
+        this.updatedAt = now;
+    }
 }
