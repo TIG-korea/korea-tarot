@@ -110,7 +110,7 @@
 
 - [X] T044 [P] [US3] 상담 생성과 idempotency test를 작성한다: backend/src/test/java/com/koreatarot/consultation/ConsultationCreationIntegrationTest.java
 - [X] T045 [P] [US3] SSE integration test를 작성한다: backend/src/test/java/com/koreatarot/consultation/ConsultationSseIntegrationTest.java
-- [ ] T046 [P] [US3] AI schema test를 작성한다: ai-server/tests/test_interpretation_schema.py
+- [X] T046 [P] [US3] AI schema test를 작성한다: ai-server/tests/test_interpretation_schema.py
 - [ ] T047 [P] [US3] 프론트엔드 결과 스트리밍 E2E test를 작성한다: front/tests/streaming-result.spec.ts
 
 ### 사용자 스토리 3 구현
@@ -120,7 +120,7 @@
 - [X] T050 [US3] 상담 생성 service를 구현한다: backend/src/main/java/com/koreatarot/consultation/service/ConsultationService.java
 - [X] T051 [US3] AI WebClient를 구현한다: backend/src/main/java/com/koreatarot/ai/client/AiInterpretationClient.java
 - [X] T052 [US3] SSE event service와 controller를 구현한다: backend/src/main/java/com/koreatarot/consultation/service/ConsultationEventService.java, backend/src/main/java/com/koreatarot/consultation/controller/ConsultationEventController.java
-- [ ] T053 [P] [US3] AI Pydantic 스키마를 구현한다: ai-server/app/schemas/interpretation.py
+- [X] T053 [P] [US3] AI Pydantic 스키마를 구현한다: ai-server/app/schemas/interpretation.py
 - [ ] T054 [US3] AI 카드 해석 문서 조회 클라이언트를 구현한다: ai-server/app/services/card_docs.py
 - [ ] T055 [US3] AI 카테고리 및 안전 분류기를 구현한다: ai-server/app/services/classifier.py
 - [ ] T056 [US3] prompt template을 구현한다: ai-server/app/prompts/tarot_v1.py
