@@ -1,13 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&family=Nanum+Myeongjo:wght@400;700;800&family=Nanum+Pen+Script&family=Playfair+Display:wght@500;600;700&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: 42 24% 96%;
-  --foreground: 224 18% 16%;
-  --primary: 168 48% 28%;
-  --primary-foreground: 0 0% 100%;
-  --border: 220 13% 83%;
+  --background: 250 33% 7%;
+  --foreground: 45 44% 88%;
+  --primary: 44 87% 65%;
+  --primary-foreground: 250 38% 9%;
+  --secondary: 265 32% 68%;
+  --secondary-foreground: 250 38% 9%;
+  --surface: 252 31% 13%;
+  --surface-muted: 253 24% 19%;
+  --on-surface: 45 44% 88%;
+  --on-surface-muted: 44 18% 67%;
+  --outline: 45 18% 48%;
+  --border: 45 18% 48%;
+  --font-display: "Playfair Display";
+  --font-body: "EB Garamond";
+  --font-script: "Nanum Pen Script";
 }
 
 * {
@@ -16,5 +28,66 @@
 
 body {
   margin: 0;
+  min-height: 100vh;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: var(--font-body), serif;
 }
 
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.mystic-bg {
+  background-image:
+    linear-gradient(180deg, hsl(250 38% 6% / 0.5), hsl(250 42% 5% / 0.95)),
+    url("https://lh3.googleusercontent.com/aida/ADBb0uhzoia1YBSHfRiD5GeoIQRgupy6MoeT2I2s2lUb4tmephvtWUtTK1Xkboht0e6OEUjIPqjSAkC_On04brbkESNDxbIxhy4xt9Nr9qIPwM6vu9uaO4kqKYkC0OVPtiYvDf1c6-IJ1DIfAVGcKlSNYVueHJ00JLnccet3DCUanVviY7XD4Nv7LvbqlS_2Yx-MmvKYYi-1ilIotG_iUFIOjHwJMNbPTawR-beOwmFLunJrB-wifUWfSRk-Rck");
+  background-position: center;
+  background-size: cover;
+}
+
+.vellum-panel {
+  border: 1px solid hsl(var(--outline) / 0.28);
+  background: linear-gradient(145deg, hsl(var(--surface) / 0.86), hsl(var(--surface-muted) / 0.7));
+  box-shadow: 0 24px 80px hsl(248 45% 4% / 0.55);
+  backdrop-filter: blur(18px);
+}
+
+.mystic-input {
+  width: 100%;
+  border: 1px solid hsl(var(--outline) / 0.28);
+  background: hsl(var(--background) / 0.5);
+  color: hsl(var(--on-surface));
+  outline: none;
+  transition: border-color 160ms ease, background 160ms ease, box-shadow 160ms ease;
+}
+
+.mystic-input:focus {
+  border-color: hsl(var(--primary) / 0.75);
+  background: hsl(var(--surface-muted) / 0.68);
+  box-shadow: 0 0 0 3px hsl(var(--primary) / 0.12);
+}
+
+.mystic-input::placeholder {
+  color: hsl(var(--on-surface-muted) / 0.65);
+}
+
+.gold-button {
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  box-shadow: 0 0 22px hsl(var(--primary) / 0.3);
+  transition: transform 160ms ease, box-shadow 160ms ease, opacity 160ms ease;
+}
+
+.gold-button:hover {
+  box-shadow: 0 0 30px hsl(var(--primary) / 0.48);
+  transform: translateY(-1px);
+}
+
+.gold-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+  transform: none;
+  box-shadow: none;
+}

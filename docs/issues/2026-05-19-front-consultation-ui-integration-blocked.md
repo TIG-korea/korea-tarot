@@ -36,5 +36,6 @@ Spec Kit 작업 목록 기준 다음 작업은 `T042` 고민 입력 화면과 `T
 
 ## 상태
 
-- 미해결
+- 해결됨
+- 2026-05-19에 사용자가 제공한 Stitch HTML 참고 UI를 기반으로 `front/app/page.tsx`, `front/app/signup/page.tsx`, `front/app/login/page.tsx`, `front/app/consultations/new/page.tsx`, `front/app/consultations/select/page.tsx`를 구성했다.
 - GitHub Issue 등록은 현재 권한 문제로 불가하므로 문서 이슈로 관리한다.

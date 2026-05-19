@@ -66,7 +66,7 @@
 - [X] T028 [US1] 내 정보 API를 구현한다: backend/src/main/java/com/koreatarot/user/controller/UserController.java
 - [X] T029 [US1] 인증 API 모듈을 구현한다: front/src/api/auth.ts
 - [X] T030 [US1] 인증 상태 저장소를 구현한다: front/src/stores/authStore.ts
-- [ ] T031 [US1] 메인, 회원가입, 로그인 화면을 구현한다: front/app/page.tsx, front/app/signup/page.tsx, front/app/login/page.tsx
+- [X] T031 [US1] 메인, 회원가입, 로그인 화면을 구현한다: front/app/page.tsx, front/app/signup/page.tsx, front/app/login/page.tsx
 
 **체크포인트**: 인증 기능을 독립적으로 사용할 수 있다.
 
@@ -93,8 +93,8 @@
 - [X] T039 [US2] draft 생성 엔드포인트를 구현한다: backend/src/main/java/com/koreatarot/consultation/controller/ConsultationDraftController.java
 - [X] T040 [US2] 카드 선택 검증을 구현한다: backend/src/main/java/com/koreatarot/consultation/service/CardSelectionValidator.java
 - [X] T041 [US2] 상담 API module을 구현한다: front/src/api/consultations.ts
-- [ ] T042 [US2] 고민 입력 화면을 구현한다: front/app/consultations/new/page.tsx
-- [ ] T043 [US2] 카드 선택 화면을 구현한다: front/app/consultations/select/page.tsx
+- [X] T042 [US2] 고민 입력 화면을 구현한다: front/app/consultations/new/page.tsx
+- [X] T043 [US2] 카드 선택 화면을 구현한다: front/app/consultations/select/page.tsx
 
 **체크포인트**: AI 생성 없이 고민 입력과 카드 선택 흐름이 동작한다.
 
