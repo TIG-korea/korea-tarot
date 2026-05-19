@@ -149,9 +149,9 @@
 - [X] T063 [US4] 기록 조회 service를 구현한다: backend/src/main/java/com/koreatarot/consultation/service/ConsultationHistoryService.java
 - [X] T064 [US4] 기록 목록, 상세, 삭제 엔드포인트를 구현한다: backend/src/main/java/com/koreatarot/consultation/controller/ConsultationHistoryController.java
 - [X] T065 [US4] cursor pagination을 구현한다: backend/src/main/java/com/koreatarot/consultation/dto/ConsultationCursor.java
-- [ ] T066 [US4] 기록 API module을 구현한다: front/src/api/history.ts
-- [ ] T067 [US4] 기록 목록 화면을 구현한다: front/app/history/page.tsx
-- [ ] T068 [US4] 기록 상세 화면을 구현한다: front/app/history/[id]/page.tsx
+- [X] T066 [US4] 기록 API module을 구현한다: front/src/api/history.ts
+- [X] T067 [US4] 기록 목록 화면을 구현한다: front/app/history/page.tsx
+- [X] T068 [US4] 기록 상세 화면을 구현한다: front/app/history/[id]/page.tsx
 
 **체크포인트**: 본인 기록 조회와 soft delete가 동작한다.
 

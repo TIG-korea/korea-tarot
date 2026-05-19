@@ -37,7 +37,7 @@ export function ResultView({ result }: ResultViewProps) {
       </p>
 
       <div className="flex flex-col gap-3 sm:flex-row sm:justify-end">
-        <Link className="rounded-xl border border-outline/30 px-6 py-3 text-center text-on-surface-muted transition hover:border-primary hover:text-primary" href="/">
+        <Link className="rounded-xl border border-outline/30 px-6 py-3 text-center text-on-surface-muted transition hover:border-primary hover:text-primary" href="/history">
           기록 보기
         </Link>
         <Link className="gold-button rounded-xl px-6 py-3 text-center font-semibold" href="/consultations/new">
