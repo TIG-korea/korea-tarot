@@ -125,8 +125,8 @@
 - [X] T055 [US3] AI 카테고리 및 안전 분류기를 구현한다: ai-server/app/services/classifier.py
 - [X] T056 [US3] prompt template을 구현한다: ai-server/app/prompts/tarot_v1.py
 - [X] T057 [US3] streaming interpretation 엔드포인트를 구현한다: ai-server/app/api/interpretations.py
-- [ ] T058 [US3] 결과 스트리밍 화면과 결과 상세 화면을 구현한다: front/app/consultations/[id]/stream/page.tsx, front/app/consultations/[id]/page.tsx
-- [ ] T059 [US3] 구조화 결과 표시 컴포넌트를 구현한다: front/src/features/consultations/ResultView.tsx
+- [X] T058 [US3] 결과 스트리밍 화면과 결과 상세 화면을 구현한다: front/app/consultations/[id]/stream/page.tsx, front/app/consultations/[id]/page.tsx
+- [X] T059 [US3] 구조화 결과 표시 컴포넌트를 구현한다: front/src/features/consultations/ResultView.tsx
 
 **체크포인트**: 저장된 결과를 포함한 상담 생성 E2E 흐름이 동작한다.
 
