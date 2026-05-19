@@ -1,0 +1,25 @@
+INSERT INTO tarot_cards
+  (id, name_en, name_ko, arcana, suit, card_number, image_url, created_at)
+VALUES
+  (1, 'The Fool', '광대', 'MAJOR', NULL, 0, '/images/cards/major-00-fool.png', NOW()),
+  (2, 'The Magician', '마법사', 'MAJOR', NULL, 1, '/images/cards/major-01-magician.png', NOW()),
+  (3, 'The High Priestess', '여사제', 'MAJOR', NULL, 2, '/images/cards/major-02-high-priestess.png', NOW()),
+  (4, 'The Empress', '여황제', 'MAJOR', NULL, 3, '/images/cards/major-03-empress.png', NOW()),
+  (5, 'The Emperor', '황제', 'MAJOR', NULL, 4, '/images/cards/major-04-emperor.png', NOW()),
+  (6, 'The Hierophant', '교황', 'MAJOR', NULL, 5, '/images/cards/major-05-hierophant.png', NOW()),
+  (7, 'The Lovers', '연인', 'MAJOR', NULL, 6, '/images/cards/major-06-lovers.png', NOW()),
+  (8, 'The Chariot', '전차', 'MAJOR', NULL, 7, '/images/cards/major-07-chariot.png', NOW()),
+  (9, 'Strength', '힘', 'MAJOR', NULL, 8, '/images/cards/major-08-strength.png', NOW()),
+  (10, 'The Hermit', '은둔자', 'MAJOR', NULL, 9, '/images/cards/major-09-hermit.png', NOW()),
+  (11, 'Wheel of Fortune', '운명의 수레바퀴', 'MAJOR', NULL, 10, '/images/cards/major-10-wheel-of-fortune.png', NOW()),
+  (12, 'Justice', '정의', 'MAJOR', NULL, 11, '/images/cards/major-11-justice.png', NOW()),
+  (13, 'The Hanged Man', '매달린 사람', 'MAJOR', NULL, 12, '/images/cards/major-12-hanged-man.png', NOW()),
+  (14, 'Death', '죽음', 'MAJOR', NULL, 13, '/images/cards/major-13-death.png', NOW()),
+  (15, 'Temperance', '절제', 'MAJOR', NULL, 14, '/images/cards/major-14-temperance.png', NOW()),
+  (16, 'The Devil', '악마', 'MAJOR', NULL, 15, '/images/cards/major-15-devil.png', NOW()),
+  (17, 'The Tower', '탑', 'MAJOR', NULL, 16, '/images/cards/major-16-tower.png', NOW()),
+  (18, 'The Star', '별', 'MAJOR', NULL, 17, '/images/cards/major-17-star.png', NOW()),
+  (19, 'The Moon', '달', 'MAJOR', NULL, 18, '/images/cards/major-18-moon.png', NOW()),
+  (20, 'The Sun', '태양', 'MAJOR', NULL, 19, '/images/cards/major-19-sun.png', NOW()),
+  (21, 'Judgement', '심판', 'MAJOR', NULL, 20, '/images/cards/major-20-judgement.png', NOW()),
+  (22, 'The World', '세계', 'MAJOR', NULL, 21, '/images/cards/major-21-world.png', NOW());

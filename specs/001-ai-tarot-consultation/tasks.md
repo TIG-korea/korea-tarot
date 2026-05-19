@@ -28,8 +28,8 @@
 
 - [X] T007 백엔드 Gradle 의존성을 구성한다: backend/build.gradle
 - [X] T008 백엔드 application profile을 구성한다: backend/src/main/resources/application.yml
-- [ ] T009 Flyway 기본 테이블 migration을 작성한다: backend/src/main/resources/db/migration/V1__create_core_tables.sql
-- [ ] T010 메이저 아르카나와 카드 해석 seed migration을 작성한다: backend/src/main/resources/db/migration/V2__seed_major_arcana.sql, backend/src/main/resources/db/migration/V3__seed_card_interpretations.sql
+- [X] T009 Flyway 기본 테이블 migration을 작성한다: backend/src/main/resources/db/migration/V1__create_users_table.sql, backend/src/main/resources/db/migration/V2__create_core_tables.sql
+- [X] T010 메이저 아르카나와 카드 해석 seed migration을 작성한다: backend/src/main/resources/db/migration/V3__seed_major_arcana.sql, backend/src/main/resources/db/migration/V4__seed_card_interpretations.sql
 - [X] T011 [P] ApiResponse 응답 래퍼를 구현한다: backend/src/main/java/com/koreatarot/global/api/ApiResponse.java
 - [X] T012 [P] Problem Details 오류 모델을 구현한다: backend/src/main/java/com/koreatarot/global/error/ProblemDetailResponse.java
 - [X] T013 GlobalExceptionHandler를 구현한다: backend/src/main/java/com/koreatarot/global/error/GlobalExceptionHandler.java
