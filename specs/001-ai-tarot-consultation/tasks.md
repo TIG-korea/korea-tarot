@@ -123,7 +123,7 @@
 - [X] T053 [P] [US3] AI Pydantic 스키마를 구현한다: ai-server/app/schemas/interpretation.py
 - [X] T054 [US3] AI 카드 해석 문서 조회 클라이언트를 구현한다: ai-server/app/services/card_docs.py
 - [X] T055 [US3] AI 카테고리 및 안전 분류기를 구현한다: ai-server/app/services/classifier.py
-- [ ] T056 [US3] prompt template을 구현한다: ai-server/app/prompts/tarot_v1.py
+- [X] T056 [US3] prompt template을 구현한다: ai-server/app/prompts/tarot_v1.py
 - [ ] T057 [US3] streaming interpretation 엔드포인트를 구현한다: ai-server/app/api/interpretations.py
 - [ ] T058 [US3] 결과 스트리밍 화면과 결과 상세 화면을 구현한다: front/app/consultations/[id]/stream/page.tsx, front/app/consultations/[id]/page.tsx
 - [ ] T059 [US3] 구조화 결과 표시 컴포넌트를 구현한다: front/src/features/consultations/ResultView.tsx
