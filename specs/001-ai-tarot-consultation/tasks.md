@@ -81,14 +81,14 @@
 ### 사용자 스토리 2 테스트
 
 - [ ] T032 [P] [US2] draft와 selection contract test를 작성한다: backend/src/test/java/com/koreatarot/consultation/DraftContractTest.java
-- [ ] T033 [P] [US2] 고민 validator test를 작성한다: backend/src/test/java/com/koreatarot/consultation/ConcernValidatorTest.java
+- [X] T033 [P] [US2] 고민 validator test를 작성한다: backend/src/test/java/com/koreatarot/consultation/service/ConcernValidatorTest.java
 - [ ] T034 [P] [US2] 프론트엔드 고민 입력 및 카드 선택 E2E test를 작성한다: front/tests/card-selection.spec.ts
 
 ### 사용자 스토리 2 구현
 
 - [X] T035 [P] [US2] TarotCard와 CardInterpretation entity를 만든다: backend/src/main/java/com/koreatarot/tarot/entity/TarotCard.java, backend/src/main/java/com/koreatarot/tarot/entity/CardInterpretation.java
 - [X] T036 [US2] 카드 목록 API를 구현한다: backend/src/main/java/com/koreatarot/tarot/controller/TarotCardController.java
-- [ ] T037 [US2] 고민 validator를 구현한다: backend/src/main/java/com/koreatarot/consultation/service/ConcernValidator.java
+- [X] T037 [US2] 고민 validator를 구현한다: backend/src/main/java/com/koreatarot/consultation/service/ConcernValidator.java
 - [ ] T038 [US2] DraftDeck Redis service를 구현한다: backend/src/main/java/com/koreatarot/consultation/service/DraftDeckService.java
 - [ ] T039 [US2] draft 생성 엔드포인트를 구현한다: backend/src/main/java/com/koreatarot/consultation/controller/ConsultationDraftController.java
 - [ ] T040 [US2] 카드 선택 검증을 구현한다: backend/src/main/java/com/koreatarot/consultation/service/CardSelectionValidator.java
