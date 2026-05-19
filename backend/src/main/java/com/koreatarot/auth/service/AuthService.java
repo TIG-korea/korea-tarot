@@ -1,10 +1,10 @@
 package com.koreatarot.auth.service;
 
 import com.koreatarot.auth.dto.AuthDto;
-import com.koreatarot.auth.security.JwtTokenService;
-import com.koreatarot.auth.security.RefreshTokenService;
 import com.koreatarot.global.error.BusinessException;
 import com.koreatarot.global.error.ErrorCode;
+import com.koreatarot.global.security.JwtTokenService;
+import com.koreatarot.global.security.RefreshTokenService;
 import com.koreatarot.user.entity.User;
 import com.koreatarot.user.repository.UserRepository;
 import org.springframework.stereotype.Service;

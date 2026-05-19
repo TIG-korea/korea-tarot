@@ -1,10 +1,10 @@
 package com.koreatarot.auth.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.koreatarot.auth.config.AuthProperties;
 import com.koreatarot.auth.dto.AuthDto;
 import com.koreatarot.auth.service.AuthService;
 import com.koreatarot.global.error.GlobalExceptionHandler;
+import com.koreatarot.global.security.AuthProperties;
 import com.koreatarot.user.entity.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

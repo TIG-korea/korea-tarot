@@ -33,5 +33,7 @@ com.koreatarot.{domain}/
   security/
 ```
 
+JWT 인증/인가처럼 여러 도메인에서 공유되는 보안 인프라는 도메인 패키지가 아니라 `com.koreatarot.global.security`에서 관리한다.
+
 Frontend UI is already user-managed. Do not create new UI unless explicitly requested; wire existing UI to API/state/validation/SSE only.
 </INSTRUCTIONS>

@@ -1,8 +1,8 @@
 package com.koreatarot.user.controller;
 
-import com.koreatarot.auth.security.AuthenticatedUser;
 import com.koreatarot.global.api.ApiResponse;
 import com.koreatarot.global.error.BusinessException;
+import com.koreatarot.global.security.AuthenticatedUser;
 import com.koreatarot.user.dto.UserDto;
 import com.koreatarot.user.entity.User;
 import com.koreatarot.user.enums.UserStatus;

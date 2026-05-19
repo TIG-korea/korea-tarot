@@ -1,6 +1,5 @@
-package com.koreatarot.auth.security;
+package com.koreatarot.global.security;
 
-import com.koreatarot.auth.config.AuthProperties;
 import com.koreatarot.global.error.BusinessException;
 import com.koreatarot.global.error.ErrorCode;
 import org.springframework.data.redis.core.StringRedisTemplate;

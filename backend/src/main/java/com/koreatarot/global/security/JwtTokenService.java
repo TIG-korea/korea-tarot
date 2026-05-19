@@ -1,6 +1,5 @@
-package com.koreatarot.auth.security;
+package com.koreatarot.global.security;
 
-import com.koreatarot.auth.config.AuthProperties;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;

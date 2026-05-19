@@ -60,7 +60,7 @@
 
 - [X] T023 [P] [US1] User entity와 repository를 만든다: backend/src/main/java/com/koreatarot/user/entity/User.java, backend/src/main/java/com/koreatarot/user/repository/UserRepository.java
 - [X] T024 [US1] 비밀번호 hashing과 검증을 구현한다: backend/src/main/java/com/koreatarot/auth/service/PasswordService.java, backend/src/main/java/com/koreatarot/auth/service/PasswordValidator.java
-- [X] T025 [US1] JWT와 refresh token service를 구현한다: backend/src/main/java/com/koreatarot/auth/security/JwtTokenService.java, backend/src/main/java/com/koreatarot/auth/security/RefreshTokenService.java
+- [X] T025 [US1] JWT와 refresh token service를 구현한다: backend/src/main/java/com/koreatarot/global/security/JwtTokenService.java, backend/src/main/java/com/koreatarot/global/security/RefreshTokenService.java
 - [X] T026 [US1] 회원가입, 로그인, refresh, logout service를 구현한다: backend/src/main/java/com/koreatarot/auth/service/AuthService.java
 - [X] T027 [US1] 인증 controller와 DTO를 구현한다: backend/src/main/java/com/koreatarot/auth/controller/AuthController.java
 - [X] T028 [US1] 내 정보 API를 구현한다: backend/src/main/java/com/koreatarot/user/controller/UserController.java

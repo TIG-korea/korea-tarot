@@ -149,8 +149,21 @@ backend/src/main/java/com/koreatarot/{domain}/
   repository/   Spring Data Repository
   enums/        상태값과 코드값 enum
   config/       도메인 설정 properties/config
-  security/     인증 principal, token filter, token service
+  security/     해당 도메인 내부 전용 보안 정책. JWT 인증/인가처럼 여러 도메인에서 공유되는 인프라는 global/security에 둔다.
   client/       외부 서버 호출 client
+```
+
+전역 보안 구조:
+
+```text
+global/security/
+  AuthenticatedUser.java
+  AuthProperties.java
+  JwtAuthenticationFilter.java
+  JwtTokenService.java
+  RefreshTokenService.java
+  SecurityConfig.java
+  SecurityExceptionHandler.java
 ```
 
 현재 인증/사용자 도메인은 다음 구조를 따른다.
@@ -162,11 +175,6 @@ auth/
   service/AuthService.java
   service/PasswordService.java
   service/PasswordValidator.java
-  security/AuthenticatedUser.java
-  security/JwtAuthenticationFilter.java
-  security/JwtTokenService.java
-  security/RefreshTokenService.java
-  config/AuthProperties.java
 
 user/
   controller/UserController.java

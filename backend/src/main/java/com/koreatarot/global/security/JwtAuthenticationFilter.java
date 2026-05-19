@@ -1,4 +1,4 @@
-package com.koreatarot.auth.security;
+package com.koreatarot.global.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
