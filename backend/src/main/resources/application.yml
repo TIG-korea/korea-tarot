@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: korea-tarot-backend
+  profiles:
+    active: local
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/korea_tarot?serverTimezone=Asia/Seoul&characterEncoding=UTF-8}
+    username: ${DB_USERNAME:korea_tarot}
+    password: ${DB_PASSWORD:korea_tarot_dev}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+  flyway:
+    enabled: true
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+
+server:
+  port: ${SERVER_PORT:8080}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+app:
+  auth:
+    access-token-ttl-minutes: ${ACCESS_TOKEN_TTL_MINUTES:15}
+    refresh-token-ttl-days: ${REFRESH_TOKEN_TTL_DAYS:7}
+  ai:
+    base-url: ${AI_SERVER_BASE_URL:http://localhost:8000}
+

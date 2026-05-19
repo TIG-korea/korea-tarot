@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 42 24% 96%;
+  --foreground: 224 18% 16%;
+  --primary: 168 48% 28%;
+  --primary-foreground: 0 0% 100%;
+  --border: 220 13% 83%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+

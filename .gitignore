@@ -1,0 +1,43 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp
+.vscode/
+.idea/
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+!front/.env.example
+!ai-server/.env.example
+!backend/src/main/resources/application-example.yml
+
+# Logs
+*.log
+logs/
+
+# Java / Gradle
+backend/build/
+backend/.gradle/
+*.class
+*.jar
+
+# Node / Next.js
+front/node_modules/
+front/.next/
+front/out/
+front/dist/
+front/build/
+front/coverage/
+
+# Python
+ai-server/__pycache__/
+ai-server/**/__pycache__/
+ai-server/*.pyc
+ai-server/.venv/
+ai-server/venv/
+ai-server/dist/
+ai-server/*.egg-info/
+

@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - "001-ai-tarot-consultation"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate repository files
+        run: |
+          test -f docker-compose.yml
+          test -f backend/build.gradle
+          test -f front/package.json
+          test -f ai-server/requirements.txt
+
