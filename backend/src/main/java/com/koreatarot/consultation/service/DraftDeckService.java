@@ -70,6 +70,21 @@ public class DraftDeckService {
         return Optional.of(deserialize(value));
     }
 
+    public DraftDeck consume(String draftId, Long userId) {
+        DraftDeck draftDeck = findById(draftId)
+                .orElseThrow(() -> new BusinessException(ErrorCode.GONE, "Draft Deck이 만료되었거나 존재하지 않습니다."));
+
+        if (!draftDeck.userId().equals(userId)) {
+            throw new BusinessException(ErrorCode.FORBIDDEN, "다른 사용자의 Draft Deck은 사용할 수 없습니다.");
+        }
+        if (draftDeck.used()) {
+            throw new BusinessException(ErrorCode.GONE, "이미 사용된 Draft Deck입니다.");
+        }
+
+        redisTemplate.delete(key(draftId));
+        return draftDeck;
+    }
+
     private String serialize(DraftDeck draftDeck) {
         try {
             return objectMapper.writeValueAsString(draftDeck);

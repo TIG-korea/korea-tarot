@@ -108,16 +108,16 @@
 
 ### 사용자 스토리 3 테스트
 
-- [ ] T044 [P] [US3] 상담 생성과 idempotency test를 작성한다: backend/src/test/java/com/koreatarot/consultation/ConsultationCreationIntegrationTest.java
+- [X] T044 [P] [US3] 상담 생성과 idempotency test를 작성한다: backend/src/test/java/com/koreatarot/consultation/ConsultationCreationIntegrationTest.java
 - [ ] T045 [P] [US3] SSE integration test를 작성한다: backend/src/test/java/com/koreatarot/consultation/ConsultationSseIntegrationTest.java
 - [ ] T046 [P] [US3] AI schema test를 작성한다: ai-server/tests/test_interpretation_schema.py
 - [ ] T047 [P] [US3] 프론트엔드 결과 스트리밍 E2E test를 작성한다: front/tests/streaming-result.spec.ts
 
 ### 사용자 스토리 3 구현
 
-- [ ] T048 [P] [US3] Consultation과 ConsultationCard entity를 만든다: backend/src/main/java/com/koreatarot/consultation/entity/Consultation.java, backend/src/main/java/com/koreatarot/consultation/entity/ConsultationCard.java
-- [ ] T049 [US3] idempotency service를 구현한다: backend/src/main/java/com/koreatarot/consultation/service/IdempotencyService.java
-- [ ] T050 [US3] 상담 생성 service를 구현한다: backend/src/main/java/com/koreatarot/consultation/service/ConsultationService.java
+- [X] T048 [P] [US3] Consultation과 ConsultationCard entity를 만든다: backend/src/main/java/com/koreatarot/consultation/entity/Consultation.java, backend/src/main/java/com/koreatarot/consultation/entity/ConsultationCard.java
+- [X] T049 [US3] idempotency service를 구현한다: backend/src/main/java/com/koreatarot/consultation/service/IdempotencyService.java
+- [X] T050 [US3] 상담 생성 service를 구현한다: backend/src/main/java/com/koreatarot/consultation/service/ConsultationService.java
 - [ ] T051 [US3] AI WebClient를 구현한다: backend/src/main/java/com/koreatarot/ai/client/AiInterpretationClient.java
 - [ ] T052 [US3] SSE event service와 controller를 구현한다: backend/src/main/java/com/koreatarot/consultation/service/ConsultationEventService.java, backend/src/main/java/com/koreatarot/consultation/controller/ConsultationEventController.java
 - [ ] T053 [P] [US3] AI Pydantic 스키마를 구현한다: ai-server/app/schemas/interpretation.py
