@@ -52,8 +52,8 @@
 
 ### 사용자 스토리 1 테스트
 
-- [ ] T020 [P] [US1] 인증 contract test를 작성한다: backend/src/test/java/com/koreatarot/auth/AuthContractTest.java
-- [ ] T021 [P] [US1] 내 정보 조회 통합 테스트를 작성한다: backend/src/test/java/com/koreatarot/user/UserProfileIntegrationTest.java
+- [X] T020 [P] [US1] 인증 contract test를 작성한다: backend/src/test/java/com/koreatarot/auth/AuthContractTest.java
+- [X] T021 [P] [US1] 내 정보 조회 통합 테스트를 작성한다: backend/src/test/java/com/koreatarot/user/UserProfileIntegrationTest.java
 - [ ] T022 [P] [US1] 프론트엔드 회원가입/로그인 E2E test를 작성한다: front/tests/auth.spec.ts
 
 ### 사용자 스토리 1 구현

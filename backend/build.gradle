@@ -39,6 +39,8 @@ dependencies {
     runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.6'
     annotationProcessor 'org.projectlombok:lombok'
 
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
     testImplementation 'org.testcontainers:junit-jupiter'
@@ -49,6 +51,12 @@ dependencies {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
+}
+
+tasks.named('compileTestJava') {
+    // 현재 Windows 검증 환경에서 디렉터리/JAR 클래스패스 참조가 불안정해 테스트 컴파일에 메인 소스를 함께 포함한다.
+    source += sourceSets.main.java
+    classpath = configurations.testCompileClasspath
 }
 
 tasks.named('test') {
