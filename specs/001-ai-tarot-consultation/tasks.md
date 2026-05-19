@@ -64,8 +64,8 @@
 - [X] T026 [US1] 회원가입, 로그인, refresh, logout service를 구현한다: backend/src/main/java/com/koreatarot/auth/AuthService.java
 - [X] T027 [US1] 인증 controller와 DTO를 구현한다: backend/src/main/java/com/koreatarot/auth/AuthController.java
 - [X] T028 [US1] 내 정보 API를 구현한다: backend/src/main/java/com/koreatarot/user/UserController.java
-- [ ] T029 [US1] 인증 API 모듈을 구현한다: front/src/api/auth.ts
-- [ ] T030 [US1] 인증 상태 저장소를 구현한다: front/src/stores/authStore.ts
+- [X] T029 [US1] 인증 API 모듈을 구현한다: front/src/api/auth.ts
+- [X] T030 [US1] 인증 상태 저장소를 구현한다: front/src/stores/authStore.ts
 - [ ] T031 [US1] 메인, 회원가입, 로그인 화면을 구현한다: front/app/page.tsx, front/app/signup/page.tsx, front/app/login/page.tsx
 
 **체크포인트**: 인증 기능을 독립적으로 사용할 수 있다.
