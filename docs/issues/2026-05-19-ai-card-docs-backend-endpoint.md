@@ -29,3 +29,9 @@ POST /internal/v1/card-interpretations/lookup
 
 - AI 서버 단위 테스트는 `httpx.MockTransport`로 검증 가능하다.
 - 실제 스트리밍 해석 엔드포인트 연동 시점에는 이 내부 API가 없으면 카드 문서 조회 단계에서 실패한다.
+# 처리 상태
+
+- 상태: 해결됨
+- 해결일: 2026-05-19
+- 처리 내용: `POST /internal/v1/card-interpretations/lookup` 내부 API를 추가해 AI 서버가 선택 카드 3장의 활성 카드 해석 문서를 조회할 수 있게 했다.
+- 응답 구조: `ApiResponse.data.documents` 안에 `documentId`, `cardId`, `cardName`, `positionCode`, `orientation`, `keywords`, `interpretation`, `documentVersion`을 포함한다.

@@ -28,6 +28,15 @@ public final class TarotApiDocs {
     public @interface ListCards {
     }
 
+    @Target(ElementType.METHOD)
+    @Retention(RetentionPolicy.RUNTIME)
+    @Operation(summary = "카드 해석 문서 내부 조회", description = "AI 서버가 선택 카드 3장의 위치별 활성 해석 문서를 조회할 때 사용하는 내부 API입니다.")
+    @ApiResponse(responseCode = "200", description = "조회 성공",
+            content = @Content(mediaType = "application/json",
+                    examples = @ExampleObject(value = OpenApiExamples.CARD_INTERPRETATION_LOOKUP_RESPONSE)))
+    public @interface LookupCardInterpretations {
+    }
+
     private TarotApiDocs() {
     }
 }

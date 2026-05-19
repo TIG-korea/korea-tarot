@@ -209,6 +209,27 @@ public final class OpenApiExamples {
             }
             """;
 
+    public static final String CARD_INTERPRETATION_LOOKUP_RESPONSE = """
+            {
+              "success": true,
+              "data": {
+                "documents": [
+                  {
+                    "documentId": "card-6-present-tarot-doc-v1.0",
+                    "cardId": 6,
+                    "cardName": "The Lovers",
+                    "positionCode": "PRESENT",
+                    "orientation": "UPRIGHT",
+                    "keywords": ["선택", "관계", "현재"],
+                    "interpretation": "현재 상황에 대한 카드 해석 문서입니다.",
+                    "documentVersion": "tarot-doc-v1.0"
+                  }
+                ]
+              },
+              "error": null
+            }
+            """;
+
     private OpenApiExamples() {
     }
 }
