@@ -20,6 +20,7 @@ from app.services.card_docs import (
     CardInterpretationDocument,
 )
 from app.services.classifier import ClassificationResult, ConcernClassifier
+from app.services.safety import SafetyResponseService
 
 
 router = APIRouter(prefix="/internal/v1/interpretations", tags=["interpretations"])
@@ -46,24 +47,26 @@ async def generate_interpretation_events(
 ) -> AsyncIterator[str]:
     started_at = time.perf_counter()
     classifier = get_classifier()
+    safety_service = get_safety_service()
     classification = classifier.classify(request.concern)
     client = get_card_document_client()
 
     try:
-        card_documents = await load_card_documents(request, classification, client)
+        card_documents = await load_card_documents(request, classification, client, safety_service)
         build_tarot_prompt(
             request=request,
             classification=classification,
             card_documents=card_documents,
         )
 
-        for token in build_mock_tokens(classification):
+        for token in build_mock_tokens(classification, safety_service):
             yield format_sse("token", {"text": token})
 
         payload = build_final_payload(
             request=request,
             classification=classification,
             card_documents=card_documents,
+            safety_service=safety_service,
             latency_ms=int((time.perf_counter() - started_at) * 1000),
         )
         yield format_sse("done", payload.model_dump(by_alias=True))
@@ -87,22 +90,27 @@ def get_card_document_client() -> CardInterpretationClient:
     return CardInterpretationClient()
 
 
+def get_safety_service() -> SafetyResponseService:
+    return SafetyResponseService()
+
+
 async def load_card_documents(
     request: StreamInterpretationRequest,
     classification: ClassificationResult,
     client: CardInterpretationClient,
+    safety_service: SafetyResponseService,
 ) -> list[CardInterpretationDocument]:
-    if classification.requires_safety_response:
-        return build_safety_documents(request.cards)
+    if safety_service.requires_safety_response(classification):
+        return safety_service.build_documents(request.cards)
     return await client.fetch(request.cards, request_id=request.request_id)
 
 
-def build_mock_tokens(classification: ClassificationResult) -> list[str]:
-    if classification.requires_safety_response:
-        return [
-            "지금은 타로 해석보다 안전을 먼저 확인해야 합니다.",
-            " 혼자 감당하지 말고 즉시 주변 사람이나 긴급 지원 기관에 도움을 요청하세요.",
-        ]
+def build_mock_tokens(
+    classification: ClassificationResult,
+    safety_service: SafetyResponseService,
+) -> list[str]:
+    if safety_service.requires_safety_response(classification):
+        return safety_service.build_tokens()
     return [
         "선택한 세 장의 카드는 고민의 현재 흐름과 막힌 지점,",
         " 그리고 현실적으로 취할 수 있는 다음 행동을 함께 보여줍니다.",
@@ -114,9 +122,10 @@ def build_final_payload(
     request: StreamInterpretationRequest,
     classification: ClassificationResult,
     card_documents: list[CardInterpretationDocument],
+    safety_service: SafetyResponseService,
     latency_ms: int,
 ) -> InterpretationFinalPayload:
-    result = build_result(classification, card_documents)
+    result = build_result(classification, card_documents, safety_service)
     return InterpretationFinalPayload(
         request_id=request.request_id,
         status="success",
@@ -134,25 +143,19 @@ def build_final_payload(
 def build_result(
     classification: ClassificationResult,
     card_documents: list[CardInterpretationDocument],
+    safety_service: SafetyResponseService,
 ) -> InterpretationResult:
-    if classification.requires_safety_response:
-        summary = "안전이 가장 먼저 필요한 상황입니다."
-        overall = (
-            "현재 고민은 타로의 상징으로 단정하기보다 즉시 도움을 받을 수 있는 환경을 "
-            "만드는 것이 우선입니다. 가까운 사람, 지역 긴급 지원, 전문기관에 지금 상태를 "
-            "알리는 방향이 필요합니다."
-        )
-        advice = "지금 혼자 있지 말고 신뢰할 수 있는 사람에게 연락하거나 긴급 지원 기관에 도움을 요청하세요."
-        caution = "이 결과는 위기 상황을 대신 해결하지 않습니다. 위험이 임박했다면 즉시 긴급 구조 요청을 하세요."
-    else:
-        summary = "카드가 고민을 정리할 세 가지 실마리를 보여줍니다."
-        overall = (
-            "현재 상황은 감정과 현실 판단을 함께 살펴야 하는 흐름입니다. 장애물 위치의 "
-            "카드는 불안하거나 불분명한 요소를 점검하라고 말하고, 조언 위치의 카드는 "
-            "균형 있는 선택을 통해 다음 단계를 정리하라고 제안합니다."
-        )
-        advice = "바로 결론을 내리기보다 지금 확인 가능한 사실과 감정을 나누어 적고, 작은 행동부터 정하세요."
-        caution = "타로 해석은 참고 정보입니다. 의료, 법률, 금융처럼 전문 판단이 필요한 문제는 전문가와 상담하세요."
+    if safety_service.requires_safety_response(classification):
+        return safety_service.build_result(card_documents)
+
+    summary = "카드가 고민을 정리할 세 가지 실마리를 보여줍니다."
+    overall = (
+        "현재 상황은 감정과 현실 판단을 함께 살펴야 하는 흐름입니다. 장애물 위치의 "
+        "카드는 불안하거나 불분명한 요소를 점검하라고 말하고, 조언 위치의 카드는 "
+        "균형 있는 선택을 통해 다음 단계를 정리하라고 제안합니다."
+    )
+    advice = "바로 결론을 내리기보다 지금 확인 가능한 사실과 감정을 나누어 적고, 작은 행동부터 정하세요."
+    caution = "타로 해석은 참고 정보입니다. 의료, 법률, 금융처럼 전문 판단이 필요한 문제는 전문가와 상담하세요."
 
     return InterpretationResult(
         summary=summary,
@@ -170,24 +173,6 @@ def build_result(
         advice=advice,
         caution=caution,
     )
-
-
-def build_safety_documents(
-    cards: list[SelectedCard],
-) -> list[CardInterpretationDocument]:
-    return [
-        CardInterpretationDocument(
-            document_id=f"safety-{card.position_code.lower()}",
-            card_id=card.card_id,
-            card_name=card.card_name,
-            position_code=card.position_code,
-            orientation=card.orientation,
-            keywords=["안전", "도움 요청"],
-            interpretation="이 위치의 카드는 구체적인 예언보다 지금 안전을 확보하는 행동이 우선임을 안내합니다.",
-            document_version="safety-v1.0",
-        )
-        for card in cards
-    ]
 
 
 def resolve_document_version(card_documents: list[CardInterpretationDocument]) -> str:
