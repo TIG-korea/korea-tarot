@@ -1,0 +1,171 @@
+package com.koreatarot.consultation.service;
+
+import com.koreatarot.ai.client.AiInterpretationClient;
+import com.koreatarot.ai.dto.AiInterpretationDto;
+import com.koreatarot.consultation.dto.ConsultationEventDto;
+import com.koreatarot.consultation.entity.Consultation;
+import com.koreatarot.consultation.entity.ConsultationCard;
+import com.koreatarot.consultation.repository.ConsultationCardRepository;
+import com.koreatarot.consultation.repository.ConsultationRepository;
+import com.koreatarot.global.error.BusinessException;
+import com.koreatarot.global.error.ErrorCode;
+import com.koreatarot.tarot.entity.TarotCard;
+import com.koreatarot.tarot.repository.TarotCardRepository;
+import org.springframework.http.codec.ServerSentEvent;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import reactor.core.publisher.Flux;
+
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+@Service
+public class ConsultationEventService {
+
+    private static final String LOCALE_KO = "ko";
+    private static final String AI_GENERATION_FAILED = "AI_GENERATION_FAILED";
+
+    private final ConsultationRepository consultationRepository;
+    private final ConsultationCardRepository consultationCardRepository;
+    private final TarotCardRepository tarotCardRepository;
+    private final AiInterpretationClient aiInterpretationClient;
+
+    public ConsultationEventService(
+            ConsultationRepository consultationRepository,
+            ConsultationCardRepository consultationCardRepository,
+            TarotCardRepository tarotCardRepository,
+            AiInterpretationClient aiInterpretationClient
+    ) {
+        this.consultationRepository = consultationRepository;
+        this.consultationCardRepository = consultationCardRepository;
+        this.tarotCardRepository = tarotCardRepository;
+        this.aiInterpretationClient = aiInterpretationClient;
+    }
+
+    @Transactional
+    public Flux<ServerSentEvent<Object>> stream(Long userId, Long consultationId) {
+        Consultation consultation = consultationRepository.findByIdAndUserIdAndDeletedAtIsNull(consultationId, userId)
+                .orElseThrow(() -> new BusinessException(ErrorCode.NOT_FOUND, "상담을 찾을 수 없습니다."));
+        List<ConsultationCard> consultationCards = consultationCardRepository
+                .findByConsultationIdOrderByPositionOrderAsc(consultationId);
+        Map<Long, TarotCard> tarotCards = tarotCardRepository.findAllById(toCardIds(consultationCards))
+                .stream()
+                .collect(Collectors.toMap(TarotCard::getId, Function.identity()));
+
+        validateCards(consultationCards, tarotCards);
+        consultation.startStreaming();
+
+        ConsultationEventDto.MetaEvent metaEvent = toMetaEvent(consultationId, consultationCards, tarotCards);
+        AiInterpretationDto.StreamRequest aiRequest = toAiRequest(consultation, consultationCards, tarotCards);
+
+        return Flux.concat(
+                        Flux.just(ServerSentEvent.builder((Object) metaEvent).event("meta").build()),
+                        aiEvents(aiRequest)
+                )
+                .onErrorResume(throwable -> handleAiFailure(consultation));
+    }
+
+    private Flux<ServerSentEvent<Object>> aiEvents(AiInterpretationDto.StreamRequest aiRequest) {
+        try {
+            return aiInterpretationClient.streamInterpretation(aiRequest)
+                    .map(this::copyEvent);
+        } catch (RuntimeException exception) {
+            return Flux.error(exception);
+        }
+    }
+
+    private List<Long> toCardIds(List<ConsultationCard> consultationCards) {
+        return consultationCards.stream()
+                .map(ConsultationCard::getCardId)
+                .toList();
+    }
+
+    private void validateCards(List<ConsultationCard> consultationCards, Map<Long, TarotCard> tarotCards) {
+        if (consultationCards.size() != 3 || tarotCards.size() != 3) {
+            throw new BusinessException(ErrorCode.INTERNAL_SERVER_ERROR, "상담 카드 정보를 찾을 수 없습니다.");
+        }
+    }
+
+    private ConsultationEventDto.MetaEvent toMetaEvent(
+            Long consultationId,
+            List<ConsultationCard> consultationCards,
+            Map<Long, TarotCard> tarotCards
+    ) {
+        List<ConsultationEventDto.CardMeta> cards = consultationCards.stream()
+                .map(card -> {
+                    TarotCard tarotCard = tarotCards.get(card.getCardId());
+                    return new ConsultationEventDto.CardMeta(
+                            card.getCardId(),
+                            tarotCard.getNameEn(),
+                            card.getPositionCode().name()
+                    );
+                })
+                .toList();
+
+        return new ConsultationEventDto.MetaEvent(consultationId, cards);
+    }
+
+    private AiInterpretationDto.StreamRequest toAiRequest(
+            Consultation consultation,
+            List<ConsultationCard> consultationCards,
+            Map<Long, TarotCard> tarotCards
+    ) {
+        List<AiInterpretationDto.SelectedCard> selectedCards = consultationCards.stream()
+                .map(card -> {
+                    TarotCard tarotCard = tarotCards.get(card.getCardId());
+                    return new AiInterpretationDto.SelectedCard(
+                            card.getCardId(),
+                            tarotCard.getNameEn(),
+                            card.getPositionCode().name(),
+                            card.getOrientation().name()
+                    );
+                })
+                .toList();
+
+        return new AiInterpretationDto.StreamRequest(
+                "req-" + UUID.randomUUID(),
+                consultation.getId(),
+                consultation.getUserId(),
+                consultation.getConcern(),
+                consultation.getSpreadType().name(),
+                selectedCards,
+                LOCALE_KO
+        );
+    }
+
+    private ServerSentEvent<Object> copyEvent(ServerSentEvent<String> source) {
+        ServerSentEvent.Builder<Object> builder = ServerSentEvent.builder((Object) source.data());
+        if (source.id() != null) {
+            builder.id(source.id());
+        }
+        if (source.event() != null) {
+            builder.event(source.event());
+        }
+        if (source.retry() != null) {
+            builder.retry(source.retry());
+        }
+        if (source.comment() != null) {
+            builder.comment(source.comment());
+        }
+        return builder.build();
+    }
+
+    private ServerSentEvent<Object> errorEvent() {
+        ConsultationEventDto.ErrorEvent event = new ConsultationEventDto.ErrorEvent(
+                AI_GENERATION_FAILED,
+                "해석 생성에 실패했습니다. 잠시 후 다시 시도해주세요."
+        );
+        return ServerSentEvent.builder((Object) event)
+                .event("error")
+                .build();
+    }
+
+    private Flux<ServerSentEvent<Object>> handleAiFailure(Consultation consultation) {
+        consultation.fail();
+        consultationRepository.save(consultation);
+        return Flux.just(errorEvent());
+    }
+}

@@ -122,6 +122,22 @@ public final class OpenApiExamples {
             }
             """;
 
+    public static final String CONSULTATION_SSE_EVENTS = """
+            event: meta
+            data: {"consultationId":1001,"cards":[{"cardId":6,"cardName":"The Lovers","positionCode":"PRESENT"}]}
+
+            event: token
+            data: {"text":"이번 리딩은 관계의 중요한 선택을 보여줍니다."}
+
+            event: done
+            data: {"result":{"summary":"관계에 대한 중요한 선택의 시기입니다.","overall":"...","cards":[],"advice":"...","caution":"..."}}
+            """;
+
+    public static final String CONSULTATION_SSE_ERROR = """
+            event: error
+            data: {"code":"AI_GENERATION_FAILED","message":"해석 생성에 실패했습니다. 잠시 후 다시 시도해주세요."}
+            """;
+
     public static final String HISTORY_LIST_RESPONSE = """
             {
               "success": true,

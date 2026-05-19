@@ -96,4 +96,18 @@ public class Consultation {
         this.createdAt = now;
         this.updatedAt = now;
     }
+
+    public void startStreaming() {
+        if (this.status == ConsultationStatus.PENDING) {
+            this.status = ConsultationStatus.STREAMING;
+            this.updatedAt = LocalDateTime.now();
+        }
+    }
+
+    public void fail() {
+        if (this.status == ConsultationStatus.PENDING || this.status == ConsultationStatus.STREAMING) {
+            this.status = ConsultationStatus.FAILED;
+            this.updatedAt = LocalDateTime.now();
+        }
+    }
 }

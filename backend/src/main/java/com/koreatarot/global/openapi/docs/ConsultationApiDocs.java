@@ -65,7 +65,12 @@ public final class ConsultationApiDocs {
     @Retention(RetentionPolicy.RUNTIME)
     @Operation(summary = "상담 결과 SSE 구독", description = "상담 ID 기준으로 meta, token, done, error SSE 이벤트를 구독합니다.")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "SSE 구독 시작"),
+            @ApiResponse(responseCode = "200", description = "SSE 구독 시작",
+                    content = @Content(mediaType = "text/event-stream",
+                            examples = {
+                                    @ExampleObject(name = "SSE 이벤트", value = OpenApiExamples.CONSULTATION_SSE_EVENTS),
+                                    @ExampleObject(name = "SSE 오류 이벤트", value = OpenApiExamples.CONSULTATION_SSE_ERROR)
+                            })),
             @ApiResponse(responseCode = "401", description = "인증 필요"),
             @ApiResponse(responseCode = "403", description = "다른 사용자의 상담 접근"),
             @ApiResponse(responseCode = "404", description = "상담 없음")
