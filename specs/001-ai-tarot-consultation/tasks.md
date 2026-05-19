@@ -30,12 +30,12 @@
 - [X] T008 백엔드 application profile을 구성한다: backend/src/main/resources/application.yml
 - [ ] T009 Flyway 기본 테이블 migration을 작성한다: backend/src/main/resources/db/migration/V1__create_core_tables.sql
 - [ ] T010 메이저 아르카나와 카드 해석 seed migration을 작성한다: backend/src/main/resources/db/migration/V2__seed_major_arcana.sql, backend/src/main/resources/db/migration/V3__seed_card_interpretations.sql
-- [ ] T011 [P] ApiResponse 응답 래퍼를 구현한다: backend/src/main/java/com/koreatarot/global/api/ApiResponse.java
-- [ ] T012 [P] Problem Details 오류 모델을 구현한다: backend/src/main/java/com/koreatarot/global/error/ProblemDetailResponse.java
-- [ ] T013 GlobalExceptionHandler를 구현한다: backend/src/main/java/com/koreatarot/global/error/GlobalExceptionHandler.java
-- [ ] T014 correlation ID filter를 구현한다: backend/src/main/java/com/koreatarot/global/observability/CorrelationIdFilter.java
-- [ ] T015 Spring Security 기본 구성을 구현한다: backend/src/main/java/com/koreatarot/global/security/SecurityConfig.java
-- [ ] T016 Redis 구성을 구현한다: backend/src/main/java/com/koreatarot/global/redis/RedisConfig.java
+- [X] T011 [P] ApiResponse 응답 래퍼를 구현한다: backend/src/main/java/com/koreatarot/global/api/ApiResponse.java
+- [X] T012 [P] Problem Details 오류 모델을 구현한다: backend/src/main/java/com/koreatarot/global/error/ProblemDetailResponse.java
+- [X] T013 GlobalExceptionHandler를 구현한다: backend/src/main/java/com/koreatarot/global/error/GlobalExceptionHandler.java
+- [X] T014 correlation ID filter를 구현한다: backend/src/main/java/com/koreatarot/global/observability/CorrelationIdFilter.java
+- [X] T015 Spring Security 기본 구성을 구현한다: backend/src/main/java/com/koreatarot/global/security/SecurityConfig.java
+- [X] T016 Redis 구성을 구현한다: backend/src/main/java/com/koreatarot/global/redis/RedisConfig.java
 - [X] T017 [P] 프론트엔드 API 클라이언트 기반을 구성한다: front/src/api/client.ts
 - [X] T018 [P] 프론트엔드 app layout과 global style을 구성한다: front/app/layout.tsx, front/src/styles/globals.css
 - [X] T019 [P] AI 서버 설정과 logging을 구성한다: ai-server/app/core/config.py, ai-server/app/core/logging.py
