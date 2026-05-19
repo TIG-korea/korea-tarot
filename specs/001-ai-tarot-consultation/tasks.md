@@ -140,15 +140,15 @@
 
 ### 사용자 스토리 4 테스트
 
-- [ ] T060 [P] [US4] 기록 목록/상세/삭제 통합 테스트를 작성한다: backend/src/test/java/com/koreatarot/consultation/ConsultationHistoryIntegrationTest.java
-- [ ] T061 [P] [US4] 타 사용자 접근 차단 test를 작성한다: backend/src/test/java/com/koreatarot/consultation/ConsultationAccessControlTest.java
+- [X] T060 [P] [US4] 기록 목록/상세/삭제 통합 테스트를 작성한다: backend/src/test/java/com/koreatarot/consultation/ConsultationHistoryIntegrationTest.java
+- [X] T061 [P] [US4] 타 사용자 접근 차단 test를 작성한다: backend/src/test/java/com/koreatarot/consultation/ConsultationAccessControlTest.java
 - [ ] T062 [P] [US4] 프론트엔드 기록 E2E test를 작성한다: front/tests/history.spec.ts
 
 ### 사용자 스토리 4 구현
 
-- [ ] T063 [US4] 기록 조회 service를 구현한다: backend/src/main/java/com/koreatarot/consultation/service/ConsultationHistoryService.java
-- [ ] T064 [US4] 기록 목록, 상세, 삭제 엔드포인트를 구현한다: backend/src/main/java/com/koreatarot/consultation/controller/ConsultationHistoryController.java
-- [ ] T065 [US4] cursor pagination을 구현한다: backend/src/main/java/com/koreatarot/consultation/dto/ConsultationCursor.java
+- [X] T063 [US4] 기록 조회 service를 구현한다: backend/src/main/java/com/koreatarot/consultation/service/ConsultationHistoryService.java
+- [X] T064 [US4] 기록 목록, 상세, 삭제 엔드포인트를 구현한다: backend/src/main/java/com/koreatarot/consultation/controller/ConsultationHistoryController.java
+- [X] T065 [US4] cursor pagination을 구현한다: backend/src/main/java/com/koreatarot/consultation/dto/ConsultationCursor.java
 - [ ] T066 [US4] 기록 API module을 구현한다: front/src/api/history.ts
 - [ ] T067 [US4] 기록 목록 화면을 구현한다: front/app/history/page.tsx
 - [ ] T068 [US4] 기록 상세 화면을 구현한다: front/app/history/[id]/page.tsx

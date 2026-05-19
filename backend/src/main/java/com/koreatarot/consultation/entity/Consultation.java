@@ -134,4 +134,12 @@ public class Consultation {
         this.completedAt = now;
         this.updatedAt = now;
     }
+
+    public void softDelete() {
+        if (this.deletedAt == null) {
+            LocalDateTime now = LocalDateTime.now();
+            this.deletedAt = now;
+            this.updatedAt = now;
+        }
+    }
 }
